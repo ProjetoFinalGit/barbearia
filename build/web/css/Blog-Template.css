@@ -8,7 +8,8 @@
   min-height: 441px;
   grid-template-columns: calc(33.3333% - 15px) calc(33.3333% - 15px) calc(33.3333% - 15px);
   height: auto;
-  grid-gap: 22px;
+  grid-gap: 22px 22px;
+  grid-auto-rows: 100%;
 }
 
 .u-section-1 .u-repeater-item-1 {
@@ -149,4 +150,6 @@
   .u-section-1 .u-image-3 {
     height: 278px;
   }
+}.u-section-2 .u-sheet-1 {
+  min-height: 500px;
 }
