@@ -1,10 +1,22 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Usuario"%>
+<%@page import="control.GerenciarLogin" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+
+
+<% 
+    Usuario ulogado = 
+            GerenciarLogin.verificarAcesso(request, response);
+    request.setAttribute("ulogado", ulogado);
+
+%>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Headers · Bootstrap v5.1</title>
+    <title>Headers Â· Bootstrap v5.1</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
 
@@ -76,23 +88,42 @@
 }</style></head>
 <header class="p-3 bg-dark text-white">
     <div class="container">
-                  <div id="imagemBanner"><svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><img  src="images/logo.png" width="200" ></svg></div>
+        <div id="imagemBanner"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
 
         
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div style="float:right;margin-top:-80px;">
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            <c:if test="${ulogado != null && ulogado.perfil != null}">
+            <c:forEach var="menu" items="${ulogado.perfil.menus}">
+                <c:if test="${menu.exibir==1}">
+                   <li><a href="${menu.link}" class="nav-link px-2 text-white">${menu.nome}</a></li> 
+                </c:if>
+            </c:forEach>
+           </c:if>
+                    <c:if test="${usuarioLogado==null}">
+                         <button type="button" class="btn btn-outline-light me-2"><a href="login.jsp">Login</a></button>
+                    </c:if>
+                         
+                    <c:if test="${usuarioLogado!=null}">
+                            <div class="dropdown text-end">
+                                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                                                </a>
+                                                
+
+
+                                  </a>
+                            </div>
+                    </c:if>     
+           
+                    
         </ul>
 
        
-
+         
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
+            
           
         </div>
       </div>

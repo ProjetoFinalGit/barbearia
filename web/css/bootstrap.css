@@ -9339,6 +9339,8 @@ textarea.form-control-lg {
 
   .justify-content-lg-start {
     justify-content: flex-start !important;
+        float: right;
+    margin-top: -80px;
   }
 
   .justify-content-lg-end {
