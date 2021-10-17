@@ -43,7 +43,9 @@
     <link rel="canonical" href="index.jsp">
     <meta property="og:url" content="index.jsp">
   </head>
-  <body data-home-page="Página-Inicial.html" data-home-page-title="Página Inicial" class="u-body"> 
+  <body data-home-page="Página-Inicial.html" data-home-page-title="Página Inicial" class="u-body" > 
+      <jsp:include page="templates/menu.jsp"/>
+    
     <section class="u-clearfix u-image u-shading u-section-1" id="sec-4182">
        
       <div class="u-clearfix u-sheet u-valign-bottom u-sheet-1">
@@ -77,10 +79,10 @@
               </div>
               <div class="u-container-style u-layout-cell u-right-cell u-size-17 u-layout-cell-3">
                 <div class="u-container-layout u-valign-top u-container-layout-3">
-                  <h5 class="u-text u-text-4">+55 (61) 99628-0717</h5>
+                  <h5 class="u-text u-text-4">+55 (61) 98279-2951</h5>
                   <h3 class="u-text u-text-5">Nossos Horários</h3>
                   <div class="u-border-2 u-border-palette-2-base u-line u-line-horizontal u-line-2"></div>
-                  <p class="u-text u-text-6"><b>SEG-SEX&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b>08:00 - 20:00<br><b>SAT</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;08:00 - 15:00&nbsp;<br>
+                  <p class="u-text u-text-6"><b>SEG-SÁB&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b>09:00 - 20:00<br><b>DOM</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;09:00 - 14:00&nbsp;<br>
                   </p>
                   <p class="u-text u-text-7">* Excelente Atendimento&nbsp;<br>* Lugar Agradável e Limpo<br>* Produtos Exclusivos&nbsp;<br>* Música<br>* Bebidas<br>* Visa/MasterCard/PIX
                   </p>
@@ -157,7 +159,7 @@
               <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
                 <div class="u-container-layout">
                   <img src="images/instagram.png" alt="" class="u-image u-image-circle u-preserve-proportions u-image-2" data-image-width="640" data-image-height="640" data-href="https://www.instagram.com/leolimabarber_shop/">
-                  <img src="images/1200px-WhatsApp.svg1.png" alt="" class="u-image u-image-circle u-image-3" data-image-width="1200" data-image-height="1204" data-href="https://wa.me/c/556182792951" data-target="_blank">
+                  <img src="images/1200px-WhatsApp.svg1.png" alt="" class="u-image u-image-circle u-image-3" data-image-width="1200" data-image-height="1204" data-href="https://api.whatsapp.com/send?phone=5561982792951&text=Ol%C3%A1%2C%20estou%20conhecendo%20a%20barbearia%20pelo%20site%20%3A)" data-target="_blank">
                 </div>
               </div>
             </div>
