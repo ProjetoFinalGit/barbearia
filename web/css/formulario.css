@@ -12,7 +12,7 @@ and open the template in the editor.
 	width:450px;
 	padding:30px;
 	margin:40px auto;
-	background: #FFF;
+	background: #00FFFFF;
 	border-radius: 10px;
 	-webkit-border-radius:10px;
 	-moz-border-radius: 10px;
@@ -22,7 +22,7 @@ and open the template in the editor.
 }
 .form-style-10 .inner-wrap{
 	padding: 30px;
-	background: #F8F8F8;
+	background: white;
 	border-radius: 6px;
 	margin-bottom: 15px;
 }
@@ -49,7 +49,7 @@ and open the template in the editor.
 .form-style-10 label{
 	display: block;
 	font: 13px Arial, Helvetica, sans-serif;
-	color: #888;
+	color: black;
 	margin-bottom: 15px;
 }
 .form-style-10 input[type="text"],
@@ -123,7 +123,7 @@ and open the template in the editor.
 	float: right;
 	width: 250px;
 	font: 12px Arial, Helvetica, sans-serif;
-	color: #4D4D4D;
+	color: white;
 	margin-top: 10px;
 	text-align: right;
 }

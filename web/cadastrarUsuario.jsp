@@ -52,20 +52,20 @@
         <form>
                 <div class="section"><span>1</span>Nome</div>
                 <div class="inner-wrap">
-                    <label>Seu Nome: <input type="text" name="nome" /></label>
+                    <label>Seu Nome: <input type="text" name="nome" required/></label>
                     
                 </div>
 
                 <div class="section"><span>2</span>Email</div>
                 <div class="inner-wrap">
-                    <label>Seu Email: <input type="email" name="email" /></label>
-                    <input type="hidden" name="status" />
+                    <label>Seu Email: <input type="email" name="email" required/></label>
+                    <input type="hidden" name="status" value="1"/>
                 </div>
 
                 <div class="section"><span>3</span>Senha:</div>
                     <div class="inner-wrap">
                     <label>Senha: <input type="password" /></label>
-                    <label>Confirme a Senha: <input type="password" name="senha" /></label>
+                    <label>Confirme a Senha: <input type="password" name="senha" required/></label>
                 </div>
                 <div class="section"><span>3</span>Perfil</div>
                     <div class="inner-wrap">
@@ -82,6 +82,7 @@
                 </div>
                 <div class="button-section">
                  <input type="submit" name="Sign Up" />
+    
                  <span class="privacy-policy">
                  <input type="checkbox" required>Você aceita os termos de uso do site. 
                  </span>

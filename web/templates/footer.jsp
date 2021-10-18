@@ -108,7 +108,7 @@
   <footer class="row row-cols-5 py-5 my-5 border-top">
     <div class="col" >
         
-      <a href="https://getbootstrap.com/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+      <a href="index.jsp" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><img src="images/logo.png" width="200" style="float:left"></svg>
       </a>
       
