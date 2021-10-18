@@ -35,8 +35,9 @@
         
     </head>
     <body>
-          <jsp:include page="templates/menu.jsp"/>
+      
         <body class="img js-fullheight" style="background-image: url(http://localhost:8080/ProjetoFinal/images/imagembanner.jpeg);">
+             <div id="imagemBanner" style="margin:40px;margin-top:40px;"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
               
 	<section class="ftco-section">
 		<div class="container">

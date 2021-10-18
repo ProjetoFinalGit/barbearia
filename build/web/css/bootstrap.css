@@ -230,7 +230,7 @@ sup {
 }
 
 a {
-  color: #0d6efd;
+  color: white;
   text-decoration: underline;
 }
 a:hover {
@@ -7607,6 +7607,7 @@ textarea.form-control-lg {
 
 .text-end {
   text-align: right !important;
+  margin:5px;
 }
 
 .text-center {
@@ -7779,9 +7780,9 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-dark {
+.menuBanner {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #9D6E58;
 }
 
 .bg-black {

@@ -158,7 +158,7 @@
               </div>
               <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
                 <div class="u-container-layout">
-                  <img src="images/instagram.png" alt="" class="u-image u-image-circle u-preserve-proportions u-image-2" data-image-width="640" data-image-height="640" data-href="https://www.instagram.com/leolimabarber_shop/">
+                    <a href="https://www.instagram.com/leolimabarber_shop/" target="_blank"><img src="images/instagram.png" alt="" class="u-image u-image-circle u-preserve-proportions u-image-2" data-image-width="640" data-image-height="640" ></a>
                   <img src="images/1200px-WhatsApp.svg1.png" alt="" class="u-image u-image-circle u-image-3" data-image-width="1200" data-image-height="1204" data-href="https://api.whatsapp.com/send?phone=5561982792951&text=Ol%C3%A1%2C%20estou%20conhecendo%20a%20barbearia%20pelo%20site%20%3A)" data-target="_blank">
                 </div>
               </div>

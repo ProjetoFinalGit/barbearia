@@ -86,7 +86,7 @@
 
   src: url('https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Black-bf067ecb8aa777ceb6df7d72226febca.woff2') format('woff2');
 }</style></head>
-<header class="p-3 bg-dark text-white">
+<header class="p-3  text-white" style="background-color:#9D6E58;">
     <div class="container">
         <div id="imagemBanner"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
 
@@ -102,18 +102,26 @@
             </c:forEach>
            </c:if>
                     <c:if test="${usuarioLogado==null}">
-                         <button type="button" class="btn btn-outline-light me-2"><a href="login.jsp">Login</a></button>
+                        
+                         <li><a href="index.jsp" class="nav-link px-2 text-white">Home</a></li> 
+                         <li><a href="sobre.jsp" class="nav-link px-2 text-white">Sobre</a></li> 
+                         <li><a href="contatos.jsp" class="nav-link px-2 text-white">Contatos</a></li> 
+                          <button type="button" class="btn btn-outline-light me-2"><a href="login.jsp" style="text-decoration: none;color:white;">Login</a></button>
+                           <button type="button" class="btn btn-outline-light me-2"><a href="cadastrarUsuario.jsp" style="text-decoration: none;color:white;">Cadastrar</a></button>
                     </c:if>
                          
                     <c:if test="${usuarioLogado!=null}">
                             <div class="dropdown text-end">
-                                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
-                                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                                                </a>
-                                                
-
-
-                                  </a>
+                                    <a href="#" class="d-block menuBanner text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                                      <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    </a>
+                                    <ul class="dropdown-menu text-small show" aria-labelledby="dropdownUser1" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start">
+                                      <li><a class="dropdown-item" >${ulogado.nome}</a></li>
+                                      <li><a class="dropdown-item" href="#">Usuários</a></li>
+                                      <li><a class="dropdown-item" href="gerenciarUsuario?acao=alterar&idUsuario=${ulogado.idUsuario}">Meus Dados</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="gerenciarLogin?acao=sair">Sair</a></li>
+                                    </ul>
                             </div>
                     </c:if>     
            
