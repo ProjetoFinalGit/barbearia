@@ -5,9 +5,9 @@
 
 
 <% 
-    Usuario ulogado = 
+    Usuario usuario = 
             GerenciarLogin.verificarAcesso(request, response);
-    request.setAttribute("ulogado", ulogado);
+    request.setAttribute("usuario", usuario);
 
 %>
 <head>
@@ -116,9 +116,9 @@
                                       <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                                     </a>
                                     <ul class="dropdown-menu text-small show" aria-labelledby="dropdownUser1" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start">
-                                      <li><a class="dropdown-item" >${ulogado.nome}</a></li>
+                                      <li><a class="dropdown-item" >${usuario.nome}</a></li>
                                       <li><a class="dropdown-item" href="#">Usuários</a></li>
-                                      <li><a class="dropdown-item" href="gerenciarUsuario?acao=alterar&idUsuario=${ulogado.idUsuario}">Meus Dados</a></li>
+                                      <li><a class="dropdown-item" href="gerenciarUsuario?acao=alterar&idUsuario=${usuario.idUsuario}">Meus Dados</a></li>
                                       <li><hr class="dropdown-divider"></li>
                                       <li><a class="dropdown-item" href="gerenciarLogin?acao=sair">Sair</a></li>
                                     </ul>

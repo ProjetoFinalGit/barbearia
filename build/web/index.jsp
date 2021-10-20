@@ -228,6 +228,9 @@
         </div>
       </div>
     </section>
+      
+    
+      
     <jsp:include page="templates/footer.jsp"/>
     
     

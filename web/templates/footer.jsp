@@ -122,7 +122,7 @@
         <li class="nav-item mb-2"><a href="contato.jsp" class="nav-link p-0 text-muted">Contato</a></li>
         <li class="nav-item mb-2"><a href="sobre.jsp" class="nav-link p-0 text-muted">Sobre</a></li>
         <li class="nav-item mb-2"><a href="login.jsp" class="nav-link p-0 text-muted">Login</a></li>
-        <li class="nav-item mb-2"><a href="" class="nav-link p-0 text-muted">Conta</a></li>
+        <li class="nav-item mb-2"><a href="" class="nav-link p-0 text-muted">Termos</a></li>
       </ul>
     </div>
 

@@ -60,6 +60,8 @@ public class GerenciarUsuario extends HttpServlet {
                                         getRequestDispatcher("/alterarUsuario.jsp");
                     request.setAttribute("user", user);
                     dispatcher.forward(request, response);
+                    
+                    
                   }else{
                        mensagem="Usuário não autorizado!";
                  out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+

@@ -50,23 +50,31 @@
         <div class="form-style-10">
         <h1>Cadastre-se <span>Cadastre-se e aproveite para conhecer nossos serviços!</span></h1>
         <form action="gerenciarUsuario" method="POST">
-                <div class="section"><span>1</span>Nome:</div>
+                <div class="section"><span>1</span>Nome e ID:</div>
                 <div class="inner-wrap">
-                    <label>Seu Nome: <input type="text" name="nome" required/></label>
-                     <input type="hidden" name="idUsuario" value=""/>
+                    <label>ID: <input type="text" name="idUsuario" value="${user.idUsuario}" readonly/></label>
+                    <label>Seu Nome: <input type="text" name="nome" value="${user.nome}" required/></label>
                     
                 </div>
 
                 <div class="section"><span>2</span>Email:</div>
                 <div class="inner-wrap">
-                    <label>Seu Email: <input type="email" name="login" required/></label>
-                    <input type="hidden" name="status" value="1"/>
+                    <label>Seu Email: <input type="email" value="${user.login}" name="login" readonly/></label>
+                    <label>Status
+                        <select class="selectionFormulario" name="status" required>
+           
+                            <option value="1" <c:if test="${user.status==1}">selected</c:if>>Ativo</option>
+                                         <option value="0" <c:if test="${user.status==0}">selected</c:if> >Desativado</option>
+                                        
+                                   
+
+                        </select></label>
                 </div>
 
                 <div class="section"><span>3</span>Senha:</div>
                     <div class="inner-wrap">
-                    <label>Senha: <input type="password" name="senha" minlength="8"/></label>
-                    <label>Confirme a Senha: <input type="password" name="senha2" required/></label>
+                    <label>Senha: <input type="password" name="senha" value="${user.senha}" id="senha" required/></label>
+                    <label>Confirme a Senha: <input type="password" name="senha" id="senha" required/></label>
                 </div>
                 <div class="section"><span>3</span>Perfil</div>
                     <div class="inner-wrap">
@@ -82,26 +90,7 @@
                               </select>
                 </div>
                 <div class="button-section">
-                 <input type="submit" name="Cadastrar" onclick=" validarSenha()"/>
-                 
-                 <script type="text/javascript">
-                    var senha = document.getElementByName('senha');
-                    var senhaC = document.getElementByName('senha2');
-
-                    function validarSenha() {
-                      if (senha.value != senhaC.value) {
-                        senhaC.setCustomValidity("Senhas diferentes!");
-                        senhaC.reportValidity();
-                        return false;
-                      } else {
-                        senhaC.setCustomValidity("");
-                        return true;
-                      }
-                    }
-
-                    // verificar também quando o campo for modificado, para que a mensagem suma quando as senhas forem iguais
-                    senhaC.addEventListener('input', validarSenha);
-                 </script>
+                 <input type="submit" name="Cadastrar" />
     
                  <span class="privacy-policy">
                      <input type="checkbox" required>Você aceita os <a href="termos.jsp">termos</a> de uso do site. 
