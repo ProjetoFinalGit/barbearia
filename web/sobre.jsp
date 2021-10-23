@@ -2,7 +2,7 @@
 <head>
 <body>
     <title>SOBRE- Léo Lima Barber Shop</title>
-    <link rel="stylesheet" href="css/nicepage2.css" media="screen">
+    <link rel="stylesheet" href="css/nicepage.css" media="screen">
     <link rel="stylesheet" href="css/sobre.css" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -29,14 +29,7 @@
             <div class="u-custom-color-2 u-preserve-proportions u-shape u-shape-circle u-shape-1"></div>
             <div class="u-align-left u-image u-image-circle u-preserve-proportions u-image-2" data-image-width="768" data-image-height="1024"></div>
             <div class="image-cropper">
-                <div class="grid" style="--bs-columns: 3;">
-                    <div>
-                        First auto-column
-                        <div class="grid">
-                            <div>Auto-column</div>
-                            <div>Auto-column</div>
-                        </div>
-                    </div>
+               
 
                     <img src="images/leo.jpeg" alt="avatar" class="profile-pic">
                 </div>

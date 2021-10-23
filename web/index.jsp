@@ -52,7 +52,7 @@
                 <div class="u-align-right u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
                     <div class="u-container-layout u-valign-middle-xl u-valign-middle-xs u-valign-top-sm u-container-layout-1">
                         <h1 class="u-text u-title u-text-1">Seja Bem-Vindo ao Léo Lima Barbershop</h1>
-                        <a href="https://nicepage.com/c/gallery-html-templates" class="u-btn u-button-style u-palette-2-base u-btn-1">Contato</a>
+                        <a href="index.jsp#sec-a2f8" class="u-btn u-button-style u-palette-2-base u-btn-1">Contato</a>
                     </div>
                 </div>
                 <img src="images/logo.png" alt="" class="u-image u-image-contain u-image-default u-image-1" data-image-width="540" data-image-height="266">
@@ -71,7 +71,7 @@
                                     <p class="u-align-justify u-text u-text-3">A barbearia costumava ser maior do que simplesmente uma área para obter um penteado ou corte; era um centro da comunidade onde as pessoas se reuniam para se relacionar, socializar e trocar sugestões. Com o objetivo de trazer de volta essa camaradagem em grande estilo, a Léo Lima, uma barbearia e loja com sede na cidade em Brasília.&nbsp;<br>
                                         <br>Obrigado pelo apoio, Léo Lima Barbearia!
                                     </p>
-                                    <a href="https://nicepage.com/k/result-html-templates" class="u-btn u-button-style u-btn-1">Sobre</a>
+                                    <a href="TemNadaAqui" class="u-btn u-button-style u-btn-1">Sobre</a>
                                 </div>
                             </div>
                             <div class="u-container-style u-image u-layout-cell u-size-16 u-image-1" data-image-width="700" data-image-height="847">
@@ -209,7 +209,7 @@
                         <div class="u-align-center u-container-style u-list-item u-repeater-item u-white u-list-item-3">
                             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                                 <img alt="" class="u-expanded-width u-image u-image-default u-image-3" src="images/aluno.jpeg" data-image-width="768" data-image-height="1024">
-                                <h5 class="u-align-left u-text u-text-palette-2-base u-text-7">barbeiro</h5>
+                                <h5 class="u-align-left u-text u-text-palette-2-base u-text-7">Aluno</h5>
                                 <h4 class="u-align-left u-text u-text-8">renatinho</h4>
                             </div>
                         </div>
