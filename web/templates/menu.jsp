@@ -105,9 +105,9 @@
                         
                          <li><a href="index.jsp" class="nav-link px-2 text-white">Home</a></li> 
                          <li><a href="sobre.jsp" class="nav-link px-2 text-white">Sobre</a></li> 
-                         <li><a href="contatos.jsp" class="nav-link px-2 text-white">Contatos</a></li> 
-                          <button type="button" class="btn btn-outline-light me-2"><a href="login.jsp" style="text-decoration: none;color:white;">Login</a></button>
-                           <button type="button" class="btn btn-outline-light me-2"><a href="cadastrarUsuario.jsp" style="text-decoration: none;color:white;">Cadastrar</a></button>
+                         <li><a href="index.jsp#sec-a2f8"  class="nav-link px-2 text-white">Contatos</a></li> 
+                         <button type="button" class="btn btn-outline-light me-2"><a href="login.jsp" style="text-decoration: none;color:white;">Login</a></button>
+                         <button type="button" class="btn btn-outline-light me-2"><a href="cadastrarUsuario.jsp" style="text-decoration: none;color:white;">Cadastrar</a></button>
                     </c:if>
                          
                     <c:if test="${usuarioLogado!=null}">
