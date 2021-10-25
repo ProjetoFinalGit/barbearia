@@ -18,7 +18,8 @@
 
 <html>
     <head>
-        <title>Página de Login</title>
+        <title>Cadastro de Usuário</title>
+        <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, 
@@ -34,6 +35,10 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/sweetalert2.all.min.js"type="text/javascript"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Máscaras -->
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/2.0.6/stylesheets/locastyle.css">
+        <!-- Fim Máscaras -->
 
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
@@ -42,9 +47,21 @@
         <link rel="stylesheet" href="css/style.css">
 
     </head>
-    <body>
+  
+        
 
     <body class="img js-fullheight" style="background-image: url(http://localhost:8080/ProjetoFinal/images/imagembanner.jpeg);">
+          <%
+        //HTTP 1.1
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //HTTP 1.0
+        response.setHeader("Pragma", "no-cache");
+        //Proxie
+        //response.setHeader("Expires", "0");
+      
+        %>
+        
+    
         <div id="imagemBanner" style="margin:40px;margin-top:40px;"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
 
         <div class="form-style-10">
@@ -54,57 +71,32 @@
                 <div class="inner-wrap">
                     <label>Seu Nome: <input type="text" name="nome" required/></label>
                     <input type="hidden" name="idUsuario" value=""/>
+                    <input type="hidden" name="idPerfil" value="4"/>
 
                 </div>
 
-                <div class="section"><span>2</span>Email:</div>
+                <div class="section"><span>2</span>Email e Telefone:</div>
                 <div class="inner-wrap">
                     <label>Seu Email: <input type="email" name="login" required/></label>
+                    <label>Telefone: <input type="text" name="telefone" class="cel-sp-mask" required/></label>
                     <input type="hidden" name="status" value="1"/>
                 </div>
 
-                <div class="section"><span>3</span>Senha:</div>
+                <div class="section"><span>3</span>Senha e CPF:</div>
                 <div class="inner-wrap">
                     <label>Senha: <input type="password" name="senha" minlength="8"/></label>
-                    <label>Confirme a Senha: <input type="password" name="senha2" required/></label>
+                    <label>CPF: <input type="text" name="cpf" class="cpf-mask" minlength="9" required/></label>
                 </div>
-                <div class="section"><span>3</span>Perfil</div>
+                <div class="section"><span>3</span>Nascimento e Endereço:</div>
                 <div class="inner-wrap">
-                    <select class="selectionFormulario" name="idPerfil" required>
-                        <option value="" selected> Escolha um perfil associado</option>
-                        <jsp:useBean class="model.PerfilDAO" id="pdao" />
-                        <c:forEach var="p" items="${pdao.lista}">
-
-                            <option value="${p.idPerfil}">${p.nome}</option>
-
-                        </c:forEach>
-
-                    </select>
+                     <label>Data de Nascimento: <input type="date" name="dataNascimento"  required /></label>
+                    <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required/></label>
                 </div>
                 <div class="button-section">
-                    <input type="submit" name="Cadastrar" onclick=" validarSenha()"/>
+                    <input type="submit" name="Cadastrar" />
 
-                    <script type="text/javascript">
-                        var senha = document.getElementByName('senha');
-                        var senhaC = document.getElementByName('senha2');
-
-                        function validarSenha() {
-                            if (senha.value != senhaC.value) {
-                                senhaC.setCustomValidity("Senhas diferentes!");
-                                senhaC.reportValidity();
-                                return false;
-                            } else {
-                                senhaC.setCustomValidity("");
-                                return true;
-                            }
-                        }
-
-                        // verificar também quando o campo for modificado, para que a mensagem suma quando as senhas forem iguais
-                        senhaC.addEventListener('input', validarSenha);
-                    </script>
-
-                    <span class="privacy-policy">
-                        <input type="checkbox" required>Você aceita os <a href="termos.jsp">termos</a> de uso do site. 
+                    <span class="privacy-policy" style="color:black;">
+                        <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
                     </span>
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
@@ -117,6 +109,9 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
         <jsp:include page="templates/footer.jsp"/>
+        <script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="//assets.locaweb.com.br/locastyle/2.0.6/javascripts/locastyle.js"></script>
+        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 
 

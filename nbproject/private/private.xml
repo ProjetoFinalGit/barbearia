@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/templates/menu.jsp</file>
-            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/index.jsp</file>
-            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/alterarUsuario.jsp</file>
+            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/src/java/model/UsuarioDAO.java</file>
             <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/cadastrarUsuario.jsp</file>
-            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/templates/footer.jsp</file>
-            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/web/css/bootstrap.css</file>
+            <file>file:/C:/Users/Elisete/Documents/NetBeansProjects/barbearia/src/java/control/GerenciarUsuario.java</file>
         </group>
     </open-files>
 </project-private>

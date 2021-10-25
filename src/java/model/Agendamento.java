@@ -13,7 +13,7 @@ public class Agendamento {
     private Date dataAgendamento;
     private double valor;
     private int status;
-    private Cliente cliente;
+ 
     private Usuario usuario;
     
     public Agendamento (){
@@ -52,13 +52,7 @@ public class Agendamento {
         this.status = status;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
+    
 
     public Usuario getUsuario() {
         return usuario;

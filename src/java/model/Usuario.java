@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Vitor
@@ -16,6 +18,12 @@ public class Usuario {
    private String senha;
    private int status;
    private Perfil perfil;
+   private String endereco;
+   private String telefone;
+   private Date dataNascimento;
+   private String cpf;
+   
+   
    
    
     public Usuario(){
@@ -69,6 +77,42 @@ public class Usuario {
     public void setPerfil(Perfil perfil){
         this.perfil=perfil;
     }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    
+    
+    
 
     
    
