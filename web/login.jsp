@@ -27,8 +27,7 @@
         <script src="js/sweetalert2.all.min.js"type="text/javascript"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <jsp:include page="templates/menu.jsp"/>
-
+      
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -69,6 +68,7 @@
                                     </div>
                                     <div class="w-50 text-md-center">
                                         <a href="#" style="color: #ae7b5b">Recuperar Senha</a>
+                                        <a href="index.jsp" style="color: white;float:left;">Voltar</a>
                                     </div>
                                 </div>
                             </form>
@@ -77,11 +77,10 @@
 
                             <script src="js/jquery.min.js"></script>
                             <script src="js/popper.js"></script>
-                            <script src="js/bootstrap.min.js"></script>
+                         
                             <script src="js/main.js"></script>
 
 
-                            <jsp:include page="templates/footer.jsp"/>
 
     </body>
 </html>

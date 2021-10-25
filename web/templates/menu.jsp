@@ -94,14 +94,23 @@
         <div style="float:right;margin-top:-80px;">
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <c:if test="${ulogado != null && ulogado.perfil != null}">
-                    <c:forEach var="menu" items="${ulogado.perfil.menus}">
+                <c:if test="${usuario != null && usuario.perfil != null}">
+                      <li><a href="index.jsp" class="nav-link px-2 text-white">Home</a></li> 
+                    <li><a href="sobre.jsp" class="nav-link px-2 text-white">Sobre</a></li> 
+                    <li><a href="index.jsp#sec-a2f8"  class="nav-link px-2 text-white">Contatos</a></li>
+                    <a href="https://www.google.com/maps/@-15.8821843,-48.0174409,3a,75y,27.96h,92.71t/data=!3m6!1e1!3m4!1sIhdaceRuOUarblJLS_SV0Q!2e0!7i16384!8i8192" target="_blank" class="text-decoration-none nav-link px-2 text-white">
+                        Localização
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
+                        </svg>
+                    </a>
+                    <c:forEach var="menu" items="${usuario.perfil.menus}">
                         <c:if test="${menu.exibir==1}">
                             <li><a href="${menu.link}" class="nav-link px-2 text-white">${menu.nome}</a></li> 
                             </c:if>
                         </c:forEach>
                     </c:if>
-                    <c:if test="${usuarioLogado==null}">
+                    <c:if test="${usuario==null}">
 
                     <li><a href="index.jsp" class="nav-link px-2 text-white">Home</a></li> 
                     <li><a href="sobre.jsp" class="nav-link px-2 text-white">Sobre</a></li> 
@@ -118,7 +127,7 @@
                     <button type="button" class="btn btn-outline-light me-2"><a href="cadastrarUsuario.jsp" style="text-decoration: none;color:white;">Cadastrar</a></button>
                 </c:if>
 
-                <c:if test="${usuarioLogado!=null}">
+                <c:if test="${usuario!=null}">
                     <div class="dropdown text-end">
                         <a href="#" class="d-block menuBanner text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
                             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
