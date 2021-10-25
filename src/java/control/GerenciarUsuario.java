@@ -9,8 +9,13 @@ import factory.ConexaoFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
+
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +40,8 @@ public class GerenciarUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {    response.setContentType("text/html;charset=UTF-8");
        String idUsuario= request.getParameter("idUsuario");
        String idPerfil= request.getParameter("idPerfil");
        String acao= request.getParameter("acao");
@@ -64,8 +70,8 @@ public class GerenciarUsuario extends HttpServlet {
                     
                   }else{
                        mensagem="Usuário não autorizado!";
-                 out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='listarUsuario.jsp';</script>");
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                        "location.href='listarUsuario.jsp';</script>");
                   }
             
              
@@ -100,6 +106,9 @@ public class GerenciarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
        PrintWriter out= response.getWriter();
        String idUsuario= request.getParameter("idUsuario");
        String nome= request.getParameter("nome");
@@ -107,11 +116,19 @@ public class GerenciarUsuario extends HttpServlet {
        String senha= request.getParameter("senha");
        int status=Integer.parseInt(request.getParameter("status"));
        String idPerfil= request.getParameter("idPerfil");
+       String cpf= request.getParameter("cpf");
+       String endereco= request.getParameter("endereco");
+       String telefone= request.getParameter("telefone");
+       String data = request.getParameter("dataNascimento");
        
        String mensagem="";
        
        
        
+       SimpleDateFormat formatoData = new SimpleDateFormat("yyyy/MM/dd");
+       
+
+      
        
        Usuario usuario = new Usuario();
                 UsuarioDAO udao= new UsuarioDAO();
@@ -119,21 +136,37 @@ public class GerenciarUsuario extends HttpServlet {
                 PerfilDAO pdao= new PerfilDAO();
       
                
-        try {
+       try {
           
             
             if(idUsuario.contentEquals("")){
                 
                
                usuario.setNome(nome);
-               usuario.setLogin(login);
-               usuario.setSenha(senha);
-               usuario.setStatus(status);
-               perfil.setIdPerfil(Integer.parseInt(idPerfil));
-               usuario.setPerfil(perfil);
+                    usuario.setLogin(login);
+                    usuario.setSenha(senha);
+                    usuario.setStatus(status);
+                    perfil.setIdPerfil(Integer.parseInt(idPerfil));
+                    usuario.setPerfil(perfil);
+                    usuario.setCpf(cpf);
+                    usuario.setDataNascimento(java.sql.Date.valueOf(data));
+                    usuario.setEndereco(endereco);
+                    usuario.setTelefone(telefone);
                
-               udao.gravar(usuario);
-               mensagem= "Usuário cadastrado com sucesso!";
+               
+               
+                 if(udao.getVerificarUsuario(login, cpf)){  
+                  
+                   mensagem= "Usuário já cadastrado!";
+                   out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                     "location.href='cadastrarUsuario.jsp';</script>"); 
+                 }else{
+                      udao.gravar(usuario);
+                   mensagem= "Usuário cadastrado com sucesso!";
+                   out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                     "location.href='index.jsp';</script>"); 
+                 }  
+               
               
               
             }else{
@@ -144,25 +177,30 @@ public class GerenciarUsuario extends HttpServlet {
                usuario.setSenha(senha);
                usuario.setStatus(status);
                perfil.setIdPerfil(Integer.parseInt(idPerfil));
+                usuario.setCpf(cpf);
+               usuario.setDataNascimento(java.sql.Date.valueOf(data));
+               usuario.setEndereco(endereco);
+               usuario.setTelefone(telefone);
                
                
                usuario.setPerfil(perfil);
                
                udao.gravar(usuario);
                mensagem= "Usuário alterado com sucesso!"; 
+               out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+               "location.href='index.jsp';</script>"); 
               
             }
 
         
         
         
-              out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-               "location.href='listarUsuario.jsp';</script>");  
+               
         
         } catch (SQLException ex) {
              mensagem="Erro ao cadastrar ou alterar Usuário, motivo: "+ex.getMessage();
                out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
-               "location.href='listarMenu.jsp';</script>");
+               "location.href='index.jsp';</script>");
         }
     }
 
