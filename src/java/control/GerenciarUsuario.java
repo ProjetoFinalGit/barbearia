@@ -71,7 +71,7 @@ public class GerenciarUsuario extends HttpServlet {
                   }else{
                        mensagem="Usuário não autorizado!";
                        out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                        "location.href='listarUsuario.jsp';</script>");
+                        "location.href='index.jsp';</script>");
                   }
             
              

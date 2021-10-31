@@ -13,7 +13,7 @@ public class Agendamento {
     private Date dataAgendamento;
     private double valor;
     private int status;
- 
+    private int idAtendente;
     private Usuario usuario;
     
     public Agendamento (){
@@ -50,6 +50,14 @@ public class Agendamento {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getAtendente() {
+        return this.idAtendente;
+    }
+
+    public void setAtendente(int atendente) {
+        this.idAtendente = atendente;
     }
 
     
