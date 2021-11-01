@@ -96,7 +96,7 @@
                                                     onclick="confirmarExclusao('${perfil.idPerfil}')">
                                                     <i class="fas fa-trash">&nbspExcluir</i>
                                                 </button>
-                                                  <a href="gerenciarMenuPerfil?acao=alterar&idPerfil=${perfil.idPerfil}"
+                                                  <a href="gerenciarMenuPerfil?acao=gerenciar&idPerfil=${perfil.idPerfil}"
                                                    class="btn btn-success btn-xs" role="button">
                                                  <i class="fas fa-edit">&nbspAcessos</i>
                                                 </a>

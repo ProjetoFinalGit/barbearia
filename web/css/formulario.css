@@ -141,3 +141,14 @@ and open the template in the editor.
   -o-transition: 0.3s;
   transition: 0.3s;
 }
+
+.botao{
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+     padding: 8px 20px 8px 20px;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    margin-left: 5px;
+    float:right;
+}
