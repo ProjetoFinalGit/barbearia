@@ -54,13 +54,13 @@
         <div id="imagemBanner" style="margin:40px;margin-top:40px;"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
 
         <div class="form-style-10">
-            <h1>Cadastre-se <span>Cadastre-se e aproveite para conhecer nossos serviços!</span></h1>
+            <h1>Alterar Cadastro <span>Altere seus dados!</span></h1>
             <form action="gerenciarUsuario" method="POST">
                 <div class="section"><span>1</span>Nome e ID:</div>
                 <div class="inner-wrap">
                     <label>ID Cadastro: <input type="text" name="idUsuario" readonly value="${user.idUsuario}"/></label>
                     <label>Seu Nome: <input type="text" name="nome" required value="${user.nome}"/></label>
-                    <input type="hidden" name="idUsuario" value=""/>
+                    
                     <input type="hidden" name="idPerfil" value="4"/>
 
                 </div>
@@ -75,7 +75,7 @@
                 <div class="section"><span>3</span>Senha e CPF:</div>
                 <div class="inner-wrap">
                     <label>Senha: <input type="password" name="senha" minlength="8" value="${user.senha}" required/></label>
-                    <label>CPF: <input type="text" name="cpf" class="cpf-mask" minlength="9" value="${user.cpf}" readonly/></label>
+                    <label>CPF: <input type="text" name="cpf" class="cpf-mask" minlength="9" value="${user.cpf}" <c:if test="${user.cpf==''}">required</c:if><c:if test="${user.cpf!=''}">readonly</c:if>/></label>
                 </div>
                 <div class="section"><span>3</span>Nascimento e Endereço:</div>
                 <div class="inner-wrap">
@@ -83,7 +83,7 @@
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required value="${user.endereco}"/></label>
                 </div>
                 <div class="button-section">
-                    <input type="submit" name="Cadastrar" />
+                    <input type="submit" name="Salvar" value="Salvar" />
 
                     <span class="privacy-policy" style="color:black;">
                         <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 

@@ -18,7 +18,8 @@ public class UsuarioDAO {
     public ArrayList<Usuario> getLista() throws SQLException{
         ArrayList<Usuario> usuarios = new ArrayList();
         Connection conexao = ConexaoFactory.conectar();
-        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil";
+        
+        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil";
         
         PreparedStatement query= conexao.prepareStatement(sql);
         ResultSet lista= query.executeQuery();
@@ -26,17 +27,18 @@ public class UsuarioDAO {
         
         while(lista.next()){
             
-            Perfil perfil = new Perfil();
+            PerfilDAO pdao= new PerfilDAO();
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(lista.getInt("u.idUsuario"));
             usuario.setNome(lista.getString("u.nome"));
             usuario.setLogin(lista.getString("u.login"));
             usuario.setSenha(lista.getString("u.senha"));
             usuario.setStatus(lista.getInt("u.status"));
-            
-            perfil.setIdPerfil(lista.getInt("p.idPerfil"));
-            perfil.setNome(lista.getString("p.nome"));
-            usuario.setPerfil(perfil);
+            usuario.setCpf(lista.getString("u.cpf"));
+            usuario.setEndereco(lista.getString("u.endereco"));
+            usuario.setTelefone(lista.getString("u.telefone"));
+            usuario.setDataNascimento(lista.getDate("u.dataNascimento"));
+            usuario.setPerfil(pdao.getCarregarPorId(lista.getInt("u.idPerfil")));
             usuarios.add(usuario);
         }
         
@@ -49,29 +51,35 @@ public class UsuarioDAO {
          
         
         if(usuario.getIdUsuario()==0){
-            String sql="INSERT INTO usuario(nome, login, senha, status, idPerfil) VALUES (?,?,?,?,?)";
+            String sql="INSERT INTO usuario(nome, login, senha, status, idPerfil,cpf,endereco,telefone,dataNascimento) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps=conexao.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getLogin());
             ps.setString(3,usuario.getSenha());
             ps.setInt(4, usuario.getStatus());
             ps.setInt(5, usuario.getPerfil().getIdPerfil());
+            ps.setString(6, usuario.getCpf());
+            ps.setString(7, usuario.getEndereco());
+            ps.setString(8, usuario.getTelefone());
+            ps.setDate(9, usuario.getDataNascimento());
+            
             
             ps.execute();
             
             
         }if(usuario.getIdUsuario()>0){
             String sql="UPDATE usuario SET nome = ?, senha = ?, " +
-                     "status = ?, idPerfil = ? WHERE idUsuario = ?";
+                     "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ? WHERE idUsuario = ?";
             PreparedStatement ps=conexao.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getLogin());   
             ps.setInt(3, usuario.getStatus());
             ps.setInt(4, usuario.getPerfil().getIdPerfil());
-            ps.setDate(5, (Date) usuario.getDataNascimento());
+            ps.setString(5,  usuario.getCpf());
             ps.setString(6, usuario.getEndereco());
             ps.setString(7, usuario.getTelefone());
-            ps.setInt(8, usuario.getIdUsuario());
+            ps.setDate(8, usuario.getDataNascimento());
+            ps.setInt(9, usuario.getIdUsuario());
             
             
             ps.execute();
@@ -95,7 +103,7 @@ public class UsuarioDAO {
         Usuario usuario = new Usuario();
         Perfil perfil= new Perfil();
         Connection conexao= ConexaoFactory.conectar();
-        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.idUsuario=?";
+        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.idUsuario=?";
         PreparedStatement ps = conexao.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet lista= ps.executeQuery();
@@ -124,7 +132,7 @@ public class UsuarioDAO {
     public Usuario getCarregarUsuario(String login,String senha) throws SQLException{
        Usuario usuario = new Usuario();
        Perfil perfil= new Perfil();
-        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.login=? AND u.senha=?";
+        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.login=? AND u.senha=?";
        
        Connection conexao= ConexaoFactory.conectar();
        PreparedStatement ps= conexao.prepareStatement(sql);
@@ -138,6 +146,10 @@ public class UsuarioDAO {
            usuario.setLogin(rs.getString("u.login"));
             usuario.setSenha(rs.getString("u.senha"));
             usuario.setStatus(rs.getInt("u.status"));
+            usuario.setCpf(rs.getString("u.cpf"));
+            usuario.setDataNascimento(rs.getDate("u.dataNascimento"));
+            usuario.setEndereco(rs.getString("u.endereco"));
+            usuario.setTelefone(rs.getString("u.telefone"));
             
             usuario.setPerfil(pdao.getCarregarPorId(rs.getInt("p.idPerfil")));
        }

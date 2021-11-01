@@ -50,6 +50,7 @@ public class PerfilDAO {
                ps = con.prepareStatement(sql);
                ps.setString(1, p.getNome());
                ps.setDate(2, new Date (p.getDataCadastro().getTime()));
+               ps.execute();
                        
            }else{
                sql = "UPDATE perfil set nome = ?,dataCadastro=? WHERE idPerfil = ?";
@@ -57,8 +58,9 @@ public class PerfilDAO {
                ps.setString(1, p.getNome());
                ps.setDate(2, new Date (p.getDataCadastro().getTime()));
                ps.setInt(3, p.getIdPerfil());
+                ps.executeUpdate();
            }
-           ps.executeUpdate();
+          
            ConexaoFactory.close(con);
            return true;
          
@@ -72,7 +74,7 @@ public class PerfilDAO {
             Connection con = ConexaoFactory.conectar();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPerfil);
-            ps.executeUpdate();
+            ps.execute();
             ConexaoFactory.close(con);
         } catch (SQLException e) {
             System.out.println("Falha ao excluir o perfil da base de dados" +

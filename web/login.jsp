@@ -50,7 +50,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4">
                         <div class="login-wrap p-0">
-                            <h3 class="mb-4 text-center">Você já é cadastrado?</h3>
+                            <h3 class="mb-4 text-center">Você já é <a href="cadastrarUsuario.jsp">cadastrado?</a></h3>
                             <form action="gerenciarLogin" method="POST" class="signin-form">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Email" name="login" required>

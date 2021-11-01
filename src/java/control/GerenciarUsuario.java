@@ -51,37 +51,29 @@ public class GerenciarUsuario extends HttpServlet {
        Usuario user= new Usuario();
        String mensagem="";
        
-       Usuario usuario=GerenciarLogin.verificarAcesso(request, response);
+      
        
       
           try{  
             
                 user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
-                if(acao.contains("alterar")){
-                
-
-                  if(Integer.parseInt(idUsuario)== usuario.getIdUsuario() || usuario.getPerfil().getIdPerfil()==1 || usuario.getPerfil().getIdPerfil()==2){  
-                    RequestDispatcher dispatcher
-                                = getServletContext().
-                                        getRequestDispatcher("/alterarUsuario.jsp");
+                if(acao.contentEquals("alterar")){
+                   
+                    user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
                     request.setAttribute("user", user);
+                    RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/alterarUsuario.jsp");
                     dispatcher.forward(request, response);
-                    
-                    
-                  }else{
-                       mensagem="Usuário não autorizado!";
-                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                        "location.href='index.jsp';</script>");
-                  }
+           
+
             
              
-                }else if(acao.contains("desativar")){
+                }if(acao.contentEquals("desativar")){
                   user.setStatus(0);
                   udao.gravar(user);
                   mensagem="Usuário desativado com sucesso!";
                  out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                    "location.href='listarUsuario.jsp';</script>");
-                }else if(acao.contains("ativar")){
+                }if(acao.contentEquals("ativar")){
                   user.setStatus(1);
                   udao.gravar(user);
                   mensagem="Usuário ativado com sucesso!";
@@ -169,26 +161,26 @@ public class GerenciarUsuario extends HttpServlet {
                
               
               
-            }else{
+            }if(Integer.parseInt(idUsuario)>0){
               
                usuario.setIdUsuario(Integer.parseInt(idUsuario));
                usuario.setNome(nome);
                usuario.setLogin(login);
                usuario.setSenha(senha);
                usuario.setStatus(status);
-               perfil.setIdPerfil(Integer.parseInt(idPerfil));
+               
                 usuario.setCpf(cpf);
                usuario.setDataNascimento(java.sql.Date.valueOf(data));
                usuario.setEndereco(endereco);
                usuario.setTelefone(telefone);
                
                
-               usuario.setPerfil(perfil);
+               usuario.setPerfil(pdao.getCarregarPorId(Integer.parseInt(idPerfil)));
                
                udao.gravar(usuario);
                mensagem= "Usuário alterado com sucesso!"; 
                out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-               "location.href='index.jsp';</script>"); 
+               "location.href='listarUsuario.jsp';</script>"); 
               
             }
 

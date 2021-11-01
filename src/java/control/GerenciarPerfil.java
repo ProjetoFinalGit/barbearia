@@ -55,7 +55,7 @@ public class GerenciarPerfil extends HttpServlet {
                 
             
              
-              }if(acao.contentEquals("excluir")){
+              }if(acao.contentEquals("deletar")){
                  
                   pdao.deletar(Integer.parseInt(idPerfil));
                   mensagem="Perfil deletado com sucesso!";
@@ -79,7 +79,10 @@ public class GerenciarPerfil extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8");
+        
         PrintWriter out = response.getWriter();
         String nome = request.getParameter("nome");
         String idPerfil = request.getParameter("idPerfil");

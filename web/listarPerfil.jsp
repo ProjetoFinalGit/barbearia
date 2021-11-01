@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Serviços</title>
+        <title>Perfis</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, 
@@ -47,60 +47,60 @@
                 <div class="h-100 justify-content-center align-items-center">
                     <div clas="col-12">
                        <div class="col-sm-2 col-12" style="padding-bottom: 10px">
-                        <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="cadastrarServico.jsp" 
-                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO SERVIÇO</a>
+                        <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="cadastrarPerfil.jsp" 
+                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO PERFIL</a>
                         </div>
                       
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover table-striped 
-                                   table-bordered" id="listarServico">
+                                   table-bordered" id="listarPerfil">
                                 <thead  style="background-color:#9D6E58;">
                                     <tr class="text-white">
                                         <th>Código</th>
                                         <th>Nome</th>
-                                        <th>Descrição</th>
-                                        <th>Preço</th>
-                                        <th>Duração(Minutos)</th>
-                                        <th>Ação</th>
+                                        <th>Data Cadastro</th>
+                                        
+                                        <th>Ações</th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
-                                    <jsp:useBean class="model.ServicoDAO" id="sdao" />
+                                    <jsp:useBean class="model.PerfilDAO" id="pdao" />
                                     
-                                    <c:forEach var="servico" items="${sdao.servicos()}">
-                                    <fmt:setLocale value="pt_BR"/>    
-                                        
+                                    <c:forEach var="perfil" items="${pdao.lista}">
+                                   
                                         <tr>
-                                            <td>${servico.idServico}</td>
-                                            <td>${servico.nome}</td>
-                                            <td>${servico.descricao}</td>
-                                            <td><fmt:formatNumber value = "${servico.preco}" type = "currency"/> </td>
-                                            <td>${servico.duracao}</td>
+                                            <td>${perfil.idPerfil}</td>
+                                            <td>${perfil.nome}</td>
+                                           
+                                            <td><fmt:formatDate 
+                                                    pattern="dd/MM/yyyy" 
+                                                    value="${perfil.dataCadastro}"/></td>
                                             <td>
-                                                <a href="gerenciarServico?acao=alterar&idServico=${servico.idServico}"
-                                                       class="btn btn-primary btn-xs" role="button">
-                                                     <i class="fas fa-edit">&nbspAlterar</i>
-                                                    </a>
-                                                     <script  type="text/javascript">
-                                          function confirmarExclusaoPerfil(idServico){
-                                                    
-                                                              
-                                                                         if(confirm('Deseja realmente excluir o serviço?')){
-                                                                                           
-                                                                            location.href="gerenciarServico?acao=deletar&idServico="+idServico;
-                                                                         }
-                                                                   
-
-                                                              
-    }
-
-                                                        </script>  
-                                                    <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarExclusaoPerfil('${servico.idServico}')">
-                                                        <i class="fas fa-trash">&nbspExcluir</i>
-                                                    </button>
-
+                                            <a href="gerenciarPerfil?acao=alterar&idPerfil=${perfil.idPerfil}"
+                                                   class="btn btn-primary btn-xs" role="button">
+                                                 <i class="fas fa-edit">&nbspAlterar</i>
+                                                </a>
+                                                 <script  type="text/javascript">
+                                      function confirmarExclusao(idPerfil){
+                                                                     
+                                                                     if(confirm('Deseja realmente excluir o perfil?')){
+                                                                                        
+                                                                        location.href="gerenciarPerfil?acao=deletar&idPerfil="+idPerfil;
+                                                                     }
+                                                                
+}
+                           
+                       </script>  
+                                                <button class='btn btn-danger btn-xs'
+                                                    onclick="confirmarExclusao('${perfil.idPerfil}')">
+                                                    <i class="fas fa-trash">&nbspExcluir</i>
+                                                </button>
+                                                  <a href="gerenciarMenuPerfil?acao=alterar&idPerfil=${perfil.idPerfil}"
+                                                   class="btn btn-success btn-xs" role="button">
+                                                 <i class="fas fa-edit">&nbspAcessos</i>
+                                                </a>
+                                                  
                                             </td>  
                                         </tr>
                                     </c:forEach>
@@ -113,7 +113,7 @@
                             <script src="datatables/dataTables.bootstrap4.js"></script>
                             <script>
                                 $(document).ready(function () {
-                                    $("#listarServico").dataTable({
+                                    $("#listarUsuario").dataTable({
                                         "bJQueryUI": true,
                                         "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "All"]],
                                         "oLanguage": {

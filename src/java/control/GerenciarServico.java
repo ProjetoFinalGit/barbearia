@@ -7,7 +7,10 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,18 +81,19 @@ public class GerenciarServico extends HttpServlet {
         int duracao = Integer.parseInt(request.getParameter("duracao"));
         String idServico= request.getParameter("idServico");
         
-       
+        NumberFormat nf = new DecimalFormat("##,###.##");
         
-        Double preco= Double.parseDouble(money.toString().replace(',', '.'));
-        
-        
-   
         PrintWriter out= response.getWriter();
-        Servico servico = new Servico();
-        ServicoDAO sdao= new ServicoDAO();
-        String mensagem="";
+        
+        try {
+            Double preco= nf.parse(money.toString()).doubleValue();
+             Servico servico = new Servico();
+            ServicoDAO sdao= new ServicoDAO();
+            String mensagem="";
         
         if(idServico.contentEquals("")){
+            
+           
             servico.setDescricao(descricao);
             servico.setDuracao(duracao);
             servico.setNome(nome);
@@ -120,5 +124,13 @@ public class GerenciarServico extends HttpServlet {
             }
                
         }
+        } catch (ParseException ex) {
+            Logger.getLogger(GerenciarServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+   
+        
+       
     }
 }
