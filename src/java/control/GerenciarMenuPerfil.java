@@ -21,6 +21,7 @@ import model.Menu;
 import model.MenuDAO;
 import model.Perfil;
 import model.PerfilDAO;
+import model.Usuario;
 
 /**
  *
@@ -40,32 +41,43 @@ public class GerenciarMenuPerfil extends HttpServlet {
        PrintWriter out = response.getWriter();
        String mensagem="";
        PerfilDAO pdao= new PerfilDAO();
+       Usuario usuario = GerenciarLogin.verificarAcesso(request, response);
        
-      
-        try { 
-            
-            
-            if(acao.contentEquals("gerenciar")){
-             
-             Perfil perfil= new Perfil();
-             perfil= pdao.getCarregarPorId(idPerfil);
-             
-             
-             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cadastrarMenuPerfil.jsp");
-             request.setAttribute("perfil", perfil);
-             dispatcher.forward(request, response);
-            }if(acao.contentEquals("desvincular")){
-               pdao.desvincular(Integer.parseInt(idMenu), idPerfil);
-               mensagem="Menu desvinculado com sucesso!";
-                 out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='gerenciarMenuPerfil?acao=gerenciar&idPerfil="+idPerfil+"'</script>");
-            
-                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarMenuPerfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+        
+        if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+        }else{
+            if(usuario.getPerfil().getIdPerfil()!=1){
+                        mensagem="Perfil não autorizado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='index.jsp';</script>");
+            }else{
+                try { 
+
+
+                    if(acao.contentEquals("gerenciar")){
+
+                     Perfil perfil= new Perfil();
+                     perfil= pdao.getCarregarPorId(idPerfil);
+
+
+                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cadastrarMenuPerfil.jsp");
+                     request.setAttribute("perfil", perfil);
+                     dispatcher.forward(request, response);
+                    }if(acao.contentEquals("desvincular")){
+                       pdao.desvincular(Integer.parseInt(idMenu), idPerfil);
+                       mensagem="Menu desvinculado com sucesso!";
+                         out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                           "location.href='gerenciarMenuPerfil?acao=gerenciar&idPerfil="+idPerfil+"'</script>");
+
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarMenuPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }   
+        }         
        
        
        
@@ -76,7 +88,7 @@ public class GerenciarMenuPerfil extends HttpServlet {
             throws ServletException, IOException {
         int idPerfil = Integer.parseInt(request.getParameter("idPerfil"));
         int idMenu= Integer.parseInt(request.getParameter("idMenu"));
-        String mensagem="Menu já referenciado";
+        String mensagem="";
         PrintWriter out = response.getWriter();
         
         try {
@@ -84,21 +96,11 @@ public class GerenciarMenuPerfil extends HttpServlet {
             ArrayList<Menu> menus = new ArrayList<>();
             menus= pdao.menusVinculadosPorPerfil(idPerfil);
             
-            for(int i=0;i<menus.size();i++){
-            
-                if(menus.get(i).getIdMenu()==idMenu){
-                 
-                  mensagem="Menu já referenciado!";
-                  break;
-                }
-                
-                if((i+1)==menus.size() && menus.get(i).getIdMenu()!=idMenu){
+           
                   pdao.vincular(idMenu, idPerfil);
                   mensagem="Menu referenciado com sucesso!";
                   
-                }
-            }
-            
+             
             
              out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                    "location.href='gerenciarMenuPerfil?acao=gerenciar&idPerfil="+idPerfil+"'</script>");

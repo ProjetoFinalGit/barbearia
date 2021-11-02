@@ -91,32 +91,10 @@
                                                    class="btn btn-primary btn-xs" role="button">
                                                  <i class="fas fa-edit">&nbspAlterar</i>
                                                 </a>
-                                                 <script  type="text/javascript">
-                                      function confirmarAtivacao(idUsuario,status){
-                                                                     var mensagem;
-                                                                     var controle;
-                                                             
-                                                                     if(status==1){
-                                                                         mensagem="desativar";
-                                                                         controle="desativar";
-                                                                     }if(status==0){
-                                                                         mensagem="desativar";
-                                                                         controle="ativar";
-                                                                     }
-                                                                     if(confirm('Deseja realmente ' +mensagem+ ' o usuário  ?')){
-                                                                                        
-                                                                        location.href="gerenciarUsuario?acao="+controle+"&idUsuario="+idUsuario;
-                                                                     }
-                                                                
-}
-                           
-                       </script>  
-                                                <button class='btn btn-danger btn-xs'
-                                                    onclick="confirmarAtivacao('${usuario.idUsuario}','${usuario.status}')">
-                                                    <i class="fas fa-trash">&nbspExcluir</i>
+                                             
                                                 </button>
-                                                    <button  <c:if test="${usuario.status==0}"> class='btn btn-success btn-xs'</c:if> <c:if test="${usuario.status==1}"> class='btn btn-danger btn-xs'</c:if>
-                                                    onclick="confirmarAtivamento('${u.idUsuario}', '${u.nome}','${u.status}','${usuarioLogado.senha}')">
+                                                    <button   <c:if test="${usuario.status==0}"> class='btn btn-success btn-xs'</c:if> <c:if test="${usuario.status==1}"> class='btn btn-danger btn-xs'</c:if>
+                                                    onclick="confirmarAtivacao('${usuario.idUsuario}', '${usuario.status}')">
                                                                 <c:if test="${usuario.status==1}"> <!-- Condicional, se for igual a 1 vai escrever Exibir no Td -->
                                                                     
                                                                     <i class="fas fa-power-off">&nbspDesativar</i> 
@@ -127,6 +105,8 @@
 
                                                                 </c:if>
                                                 </button>
+                                             
+                                                
                                                   
                                             </td>  
                                         </tr>
@@ -165,6 +145,26 @@
 
 
                             </script>
+                                <script  type="text/javascript">
+                                      function confirmarAtivacao(idUsuario,status){
+                                                                     var mensagem;
+                                                                     var controle;
+                                                             
+                                                                     if(status==1){
+                                                                         mensagem="desativar";
+                                                                         controle="desativar";
+                                                                     }if(status==0){
+                                                                         mensagem="desativar";
+                                                                         controle="ativar";
+                                                                     }
+                                                                     if(confirm('Deseja realmente ' +mensagem+ ' o usuário  ?')){
+                                                                                        
+                                                                        location.href="gerenciarUsuario?acao="+controle+"&idUsuario="+idUsuario;
+                                                                     }
+                                                                
+}
+                           
+                       </script>  
                          
                         </div>
                     </div>

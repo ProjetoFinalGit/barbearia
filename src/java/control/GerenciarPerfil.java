@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Perfil;
 import model.PerfilDAO;
+import model.Usuario;
 
 /**
  *
@@ -41,37 +42,51 @@ public class GerenciarPerfil extends HttpServlet {
 
         Perfil perfil = new Perfil();
         PerfilDAO pdao = new PerfilDAO();
+        Usuario usuario = new Usuario();
+        usuario = GerenciarLogin.verificarAcesso(request, response);
 
-        try {
-             if(acao.contains("alterar")){
-                perfil= pdao.getCarregarPorId(Integer.parseInt(idPerfil));
-                
-                RequestDispatcher dispatcher
-                            = getServletContext().
-                                    getRequestDispatcher("/alterarPerfil.jsp");
-                request.setAttribute("perfil", perfil);
-                dispatcher.forward(request, response);
+        if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+        }else{
+           if(usuario.getPerfil().getIdPerfil()!=1){
+                        mensagem="Perfil não autorizado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='index.jsp';</script>");
+           }else{
+               
+               try {
+                    if(acao.contains("alterar")){
+                       perfil= pdao.getCarregarPorId(Integer.parseInt(idPerfil));
+
+                       RequestDispatcher dispatcher
+                                   = getServletContext().
+                                           getRequestDispatcher("/alterarPerfil.jsp");
+                       request.setAttribute("perfil", perfil);
+                       dispatcher.forward(request, response);
                 
                 
             
              
-              }if(acao.contentEquals("deletar")){
-                 
-                  pdao.deletar(Integer.parseInt(idPerfil));
-                  mensagem="Perfil deletado com sucesso!";
-                 out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='listarPerfil.jsp';</script>");
+                }if(acao.contentEquals("deletar")){
+
+
+                        pdao.deletar(Integer.parseInt(idPerfil));
+                        mensagem="Perfil deletado com sucesso!";
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                         "location.href='listarPerfil.jsp';</script>");}
+                 }
+                  catch (SQLException e) {
+                      mensagem = "Erro: " + e.getMessage();
+                      out.println(mensagem);
                     }
-        } catch (SQLException e) {
-            mensagem = "Erro: " + e.getMessage();
-            out.println(mensagem);
-        }
+           }
+                
+        }    
+        
+        
        
-        out.println(
-                "<script type='text/javascript'>"
-                + "alert('" + mensagem + "');"
-                + "location.href='listarPerfil.jsp';"
-                + "</script>");
+       
 
     }
 

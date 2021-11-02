@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.io.PrintWriter"%>
+<%@page import="control.GerenciarLogin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
         import="java.util.ArrayList"
         import="model.Perfil"
@@ -15,7 +17,24 @@
 
 <!-- Novo teste de commit -->
 <!DOCTYPE html>
+<%   
+    
+    Usuario usuario = new Usuario();
+    usuario = GerenciarLogin.verificarAcesso(request, response);
+    PrintWriter saida = response.getWriter();
+    if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+    }else{
+        if(usuario.getPerfil().getIdPerfil()!=1){
 
+
+
+                   saida.println("<script type='text/javascript'> "+"alert('Usuário não autorizado!');"+
+                   "location.href='index.jsp';</script>");
+        }
+    }    
+    %>
 <html>
     <head>
         <title>Cadastro de Perfil</title>

@@ -72,7 +72,7 @@ public class UsuarioDAO {
                      "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ? WHERE idUsuario = ?";
             PreparedStatement ps=conexao.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getLogin());   
+            ps.setString(2, usuario.getSenha());   
             ps.setInt(3, usuario.getStatus());
             ps.setInt(4, usuario.getPerfil().getIdPerfil());
             ps.setString(5,  usuario.getCpf());

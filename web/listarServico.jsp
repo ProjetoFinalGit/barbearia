@@ -13,7 +13,24 @@
         import="model.PerfilDAO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+<%   
+    
+    Usuario usuario = new Usuario();
+    usuario = GerenciarLogin.verificarAcesso(request, response);
+    PrintWriter saida = response.getWriter();
+     if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+    }else{
+        if(usuario.getPerfil().getIdPerfil()>2){
 
+
+
+                   saida.println("<script type='text/javascript'> "+"alert('Usuário não autorizado!');"+
+                   "location.href='index.jsp';</script>");
+        }
+     }    
+    %>
 
 <!DOCTYPE html>
 <html>

@@ -59,10 +59,18 @@ public class GerenciarLogin extends HttpServlet {
             usuario= udao.getCarregarUsuario(login,senha);
             
             if((usuario.getIdUsuario()>0) && (usuario.getSenha().equals(senha.trim()))){
+               
+                if(usuario.getStatus()!=1){
+                     mensagem="Usuário desativado, entre em contato com o administrador para mais informações!"; 
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                   "location.href='login.jsp';</script>");
+                    
+                }else{
+                    HttpSession session= request.getSession();
+                    session.setAttribute("usuarioLogado", usuario);
+                    response.sendRedirect("index.jsp");
+                }
                 
-               HttpSession session= request.getSession();
-               session.setAttribute("usuarioLogado", usuario);
-               response.sendRedirect("index.jsp");
                
             }else{
                 

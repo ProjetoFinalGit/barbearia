@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Menu;
 import model.MenuDAO;
+import model.Usuario;
 
 /**
  *
@@ -38,54 +39,64 @@ public class GerenciarMenu extends HttpServlet {
        String exibir= request.getParameter("exibir");
        PrintWriter out = response.getWriter();
         String mensagem="";
-
+        Usuario usuario = GerenciarLogin.verificarAcesso(request, response);
        
         
+        if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+        }else{
+            if(usuario.getPerfil().getIdPerfil()>2){
+                        mensagem="Perfil não autorizado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='index.jsp';</script>");
+            }else{
+                if(acao.contains("deletar")){
+                       MenuDAO mdao = new MenuDAO();
 
-        if(acao.contains("deletar")){
-               MenuDAO mdao = new MenuDAO();
-               
-           try {
-               
-              
-                  mdao.deletar(idMenu);
-                
-                  mensagem="Menu excluído com sucesso!"; 
-               
-              
-               out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-               "location.href='listarMenu.jsp';</script>");
-           } catch (SQLException ex) {
-                mensagem="Erro ao excluir Menu, motivo: "+ex.getMessage();
-               out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
-               "location.href='listarMenu.jsp';</script>");
-           } catch(NullPointerException nul){
-               mensagem="Erro ao excluir Menu, motivo: "+nul.getMessage();
-               out.println("<script type='text/javascript'> "+"alert('"+mensagem+nul.getMessage()+"');"+
-               "location.href='listarMenu.jsp';</script>");
-           }
-               
-               
-        }if(acao.contentEquals("alterar")){
-            
-           try { 
-               
-               
-                    MenuDAO mdao= new MenuDAO();
-                    Menu menu= mdao.getCarregarPorId(idMenu);;
-                    menu.setIdMenu(idMenu);
+                   try {
 
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alterarMenu.jsp");
-                    request.setAttribute("menu", menu);
-                    dispatcher.forward(request, response);
-               
-           } catch (SQLException ex) {
-               mensagem="Erro ao alterar Menu, motivo: "+ex.getMessage();
-               out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
-               "location.href='listarMenu.jsp';</script>");
-           }
-          
-        }
+
+                          mdao.deletar(idMenu);
+
+                          mensagem="Menu excluído com sucesso!"; 
+
+
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='listarMenu.jsp';</script>");
+                   } catch (SQLException ex) {
+                        mensagem="Erro ao excluir Menu, motivo: "+ex.getMessage();
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
+                       "location.href='listarMenu.jsp';</script>");
+                   } catch(NullPointerException nul){
+                       mensagem="Erro ao excluir Menu, motivo: "+nul.getMessage();
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+nul.getMessage()+"');"+
+                       "location.href='listarMenu.jsp';</script>");
+                   }
+
+
+                }if(acao.contentEquals("alterar")){
+
+                   try { 
+
+
+                            MenuDAO mdao= new MenuDAO();
+                            Menu menu= mdao.getCarregarPorId(idMenu);;
+                            menu.setIdMenu(idMenu);
+
+                            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alterarMenu.jsp");
+                            request.setAttribute("menu", menu);
+                            dispatcher.forward(request, response);
+
+                   } catch (SQLException ex) {
+                       mensagem="Erro ao alterar Menu, motivo: "+ex.getMessage();
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
+                       "location.href='listarMenu.jsp';</script>");
+                   }
+
+                }
+            }     
+        }         
     }
 
     

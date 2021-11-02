@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="control.GerenciarLogin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
         import="java.util.ArrayList"
         import="model.Perfil"
@@ -16,6 +17,14 @@
 
 <!-- Novo teste de commit -->
 <!DOCTYPE html>
+<%   
+    
+    Usuario usuarioLogado = new Usuario();
+    usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
+    
+    
+    
+    %>
 
 <html>
     <head>
@@ -61,9 +70,7 @@
                     <label>ID Cadastro: <input type="text" name="idUsuario" readonly value="${user.idUsuario}"/></label>
                     <label>Seu Nome: <input type="text" name="nome" required value="${user.nome}"/></label>
                     
-                    <input type="hidden" name="idPerfil" value="4"/>
-
-                </div>
+                   
 
                 <div class="section"><span>2</span>Email e Telefone:</div>
                 <div class="inner-wrap">
@@ -83,9 +90,26 @@
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required value="${user.endereco}"/></label>
                 </div>
                 <div class="button-section">
-                    <input type="submit" name="Salvar" value="Salvar" />
+                     <c:if test="${usuarioLogado.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="4"/></c:if>
+                    <c:if test="${usuarioLogado.perfil.idPerfil==1}">
+                       <div class="section"><span>4</span>Associação:</div> 
+                        <div class="inner-wrap">
+                     <jsp:useBean class="model.PerfilDAO" id="pdao"/>          
+                                  <select name="idPerfil" required >
+                                      <option value="" selected> Escolha um menu para associar</option>
+                                      <c:forEach var="perfil" items="${pdao.lista}">
+                                         <option value="${perfil.idPerfil}">${perfil.nome}</option>
+                                      
+                                     </c:forEach>
+                                      
+                                      
+                                  </select>
+                    </div></c:if>
+                </div>
+                    
 
                     <span class="privacy-policy" style="color:black;">
+                        <input style="float:left;" type="submit" name="Salvar" value="Salvar" />
                         <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
                     </span>
                 </div>
