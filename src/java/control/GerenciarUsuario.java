@@ -51,46 +51,55 @@ public class GerenciarUsuario extends HttpServlet {
        Usuario user= new Usuario();
        String mensagem="";
        
-      
+       Usuario usuario = GerenciarLogin.verificarAcesso(request, response);
        
-      
-          try{  
-            
-                user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
-                if(acao.contentEquals("alterar")){
-                   
-                    user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
-                    request.setAttribute("user", user);
-                    RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/alterarUsuario.jsp");
-                    dispatcher.forward(request, response);
-           
+        if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+        }else{
+            if(usuario.getPerfil().getIdPerfil()>2 && usuario.getIdUsuario() != Integer.parseInt(idUsuario)){
+                  mensagem="Perfil não autorizado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='listarUsuario.jsp';</script>");
+            }else{
+                try{  
 
-            
-             
-                }if(acao.contentEquals("desativar")){
-                  user.setStatus(0);
-                  udao.gravar(user);
-                  mensagem="Usuário desativado com sucesso!";
-                 out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='listarUsuario.jsp';</script>");
-                }if(acao.contentEquals("ativar")){
-                  user.setStatus(1);
-                  udao.gravar(user);
-                  mensagem="Usuário ativado com sucesso!";
-                 out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='listarUsuario.jsp';</script>");
-                }
-                
-       
-            
-            
-            } catch (SQLException ex) {
-            mensagem="Erro ao alterar ou remover Usuário, motivo: "+ex.getMessage();
-            out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
-            "location.href='listarPerfil.jsp';</script>");
-            }
+                      user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
+                      if(acao.contentEquals("alterar")){
+
+                          user= udao.getCarregarPorId(Integer.parseInt(idUsuario));
+                          request.setAttribute("user", user);
+                          RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/alterarUsuario.jsp");
+                          dispatcher.forward(request, response);
+
+
+
+
+                      }if(acao.contentEquals("desativar")){
+                        user.setStatus(0);
+                        udao.gravar(user);
+                        mensagem="Usuário desativado com sucesso!";
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                         "location.href='listarUsuario.jsp';</script>");
+                      }if(acao.contentEquals("ativar")){
+                        user.setStatus(1);
+                        udao.gravar(user);
+                        mensagem="Usuário ativado com sucesso!";
+                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                         "location.href='listarUsuario.jsp';</script>");
+                      }
+
+
+
+
+                  } catch (SQLException ex) {
+                  mensagem="Erro ao alterar ou remover Usuário, motivo: "+ex.getMessage();
+                  out.println("<script type='text/javascript'> "+"alert('"+mensagem+ex.getMessage()+"');"+
+                  "location.href='listarPerfil.jsp';</script>");
+                  }
+            }     
         
-       
+        }
        
     }
 

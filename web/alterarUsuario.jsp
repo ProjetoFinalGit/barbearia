@@ -19,11 +19,13 @@
 <!DOCTYPE html>
 <%   
     
-    Usuario usuarioLogado = new Usuario();
-    usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
+    Usuario usuario = new Usuario();
+    usuario = GerenciarLogin.verificarAcesso(request, response);
     
-    
-    
+     if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+    }
     %>
 
 <html>
@@ -90,15 +92,15 @@
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required value="${user.endereco}"/></label>
                 </div>
                 <div class="button-section">
-                     <c:if test="${usuarioLogado.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="4"/></c:if>
+                     <c:if test="${usuarioLogado.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="${user.perfil.idPerfil}"/></c:if>
                     <c:if test="${usuarioLogado.perfil.idPerfil==1}">
-                       <div class="section"><span>4</span>Associação:</div> 
+                       <div class="section"><span>4</span>Acesso:</div> 
                         <div class="inner-wrap">
                      <jsp:useBean class="model.PerfilDAO" id="pdao"/>          
                                   <select name="idPerfil" required >
-                                      <option value="" selected> Escolha um menu para associar</option>
+                                      <option value="" selected> Escolha o perfil de acesso:</option>
                                       <c:forEach var="perfil" items="${pdao.lista}">
-                                         <option value="${perfil.idPerfil}">${perfil.nome}</option>
+                                          <option value="${perfil.idPerfil}" >${perfil.nome}</option>
                                       
                                      </c:forEach>
                                       

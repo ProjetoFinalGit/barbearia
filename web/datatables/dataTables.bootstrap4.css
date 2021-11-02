@@ -28,7 +28,7 @@ div.dataTables_wrapper div.dataTables_length label {
   float:left;
 }
 div.dataTables_wrapper div.dataTables_length select {
-  width: auto;
+  width: 40px;
   display: inline-block;
 }
 div.dataTables_wrapper div.dataTables_filter {

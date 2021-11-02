@@ -67,7 +67,7 @@
                        <div class="col-sm-2 col-12" style="padding-bottom: 10px">
                         <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="cadastrarPerfil.jsp" 
                            role="button"><i class="fas fa-user-plus"></i>&nbspNOVO PERFIL</a>
-                        </div>
+                       </div><br><br>
                       
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover table-striped 

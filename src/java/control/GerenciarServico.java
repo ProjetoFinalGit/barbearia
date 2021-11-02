@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Servico;
 import model.ServicoDAO;
+import model.Usuario;
 
 /**
  *
@@ -41,34 +42,48 @@ public class GerenciarServico extends HttpServlet {
         Servico servico= new Servico();
         PrintWriter out = response.getWriter();
         String mensagem="";
+        Usuario usuario= GerenciarLogin.verificarAcesso(request, response);
         
-        if(acao.contentEquals("alterar")){
-            try {
-                servico= sdao.carregarServicoPorId(idServico);
-                request.setAttribute("servico", servico);
-                RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/alterarServico.jsp");
-                dispatcher.forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(GerenciarServico.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-        if(acao.contentEquals("deletar")){
-            try {
-                if(sdao.deletarServico(idServico)){
-                    mensagem="Serviço deletado com sucesso";
-                        out.println(
-                    "<script type='text/javascript'>"
-                    + "alert('" + mensagem + "');"
-                    + "location.href='listarServico.jsp';"
-                    + "</script>");
+        if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+        }else{
+            if(usuario.getPerfil().getIdPerfil()>2){
+
+
+
+                   out.println("<script type='text/javascript'> "+"alert('Usuário não autorizado!');"+
+                   "location.href='index.jsp';</script>");
+            }else{
+                if(acao.contentEquals("alterar")){
+                    try {
+                        servico= sdao.carregarServicoPorId(idServico);
+                        request.setAttribute("servico", servico);
+                        RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/alterarServico.jsp");
+                        dispatcher.forward(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GerenciarServico.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(GerenciarServico.class.getName()).log(Level.SEVERE, null, ex);
-            }
-;
-            
-        }
+                if(acao.contentEquals("deletar")){
+                    try {
+                        if(sdao.deletarServico(idServico)){
+                            mensagem="Serviço deletado com sucesso";
+                                out.println(
+                            "<script type='text/javascript'>"
+                            + "alert('" + mensagem + "');"
+                            + "location.href='listarServico.jsp';"
+                            + "</script>");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GerenciarServico.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                }
+            }    
+        }    
     }
 
    

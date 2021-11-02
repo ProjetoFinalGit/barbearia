@@ -13,7 +13,24 @@
         import="model.PerfilDAO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+<%   
+    
+    Usuario usuario = new Usuario();
+    usuario = GerenciarLogin.verificarAcesso(request, response);
+    PrintWriter saida = response.getWriter();
+     if(usuario==null){
+                     out.println("<script type='text/javascript'> "+
+                     "location.href='login.jsp';</script>"); 
+    }else{
+        if(usuario.getPerfil().getIdPerfil()>3){
 
+
+
+                   saida.println("<script type='text/javascript'> "+"alert('Usuário não autorizado!');"+
+                   "location.href='index.jsp';</script>");
+        }
+     }    
+    %>
 
 <!DOCTYPE html>
 <html>
@@ -47,7 +64,7 @@
                     <div clas="col-12">
                        <div class="col-sm-2 col-12" style="padding-bottom: 10px">
                         <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="cadastrarUsuario.jsp" 
-                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO USUÁRIO</a>
+                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO USUÁRIO</a><br><br>
                         </div>
                       
                         <div class="table-responsive" style="text-align: center;">
