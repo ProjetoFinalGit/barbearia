@@ -7,6 +7,8 @@
 <%
     Usuario usuario
             = GerenciarLogin.verificarAcesso(request, response);
+    
+    
     request.setAttribute("usuario", usuario);
 
 %>

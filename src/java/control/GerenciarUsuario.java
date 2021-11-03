@@ -165,7 +165,7 @@ public class GerenciarUsuario extends HttpServlet {
                       udao.gravar(usuario);
                    mensagem= "Usuário cadastrado com sucesso!";
                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                     "location.href='index.jsp';</script>"); 
+                     "location.href='login.jsp';</script>"); 
                  }  
                
               

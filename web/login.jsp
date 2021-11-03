@@ -67,7 +67,7 @@
 
                                     </div>
                                     <div class="w-50 text-md-center">
-                                        <a href="#" style="color: #ae7b5b">Recuperar Senha</a>
+                                        <a href="recuperarSenha.jsp" style="color: #ae7b5b">Recuperar Senha</a>
                                         <a href="index.jsp" style="color: white;float:left;">Voltar</a>
                                     </div>
                                 </div>

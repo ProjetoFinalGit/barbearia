@@ -92,8 +92,8 @@
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required value="${user.endereco}"/></label>
                 </div>
                 <div class="button-section">
-                     <c:if test="${usuarioLogado.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="${user.perfil.idPerfil}"/></c:if>
-                    <c:if test="${usuarioLogado.perfil.idPerfil==1}">
+                     <c:if test="${usuario.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="${user.perfil.idPerfil}"/></c:if>
+                    <c:if test="${usuario.perfil.idPerfil==1}">
                        <div class="section"><span>4</span>Acesso:</div> 
                         <div class="inner-wrap">
                      <jsp:useBean class="model.PerfilDAO" id="pdao"/>          

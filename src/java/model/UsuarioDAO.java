@@ -202,7 +202,7 @@ public class UsuarioDAO {
         
         
         
-        
+        conexao.close();
         return atendentes;
     }
     
@@ -222,7 +222,7 @@ public class UsuarioDAO {
             user.setCpf(usuario.getString("cpf"));
             lista.add(user);
         }
-        
+        conexao.close();
         return lista;
         
     }
@@ -242,7 +242,43 @@ public class UsuarioDAO {
         
         
         
-        
+        conexao.close();
         return clientes;
+    }
+    
+    public Usuario recuperarSenha(String cpf, String login, Date dataNascimento) throws SQLException{
+        Usuario usuario = new Usuario();
+        Connection conexao = ConexaoFactory.conectar();
+        String sql="SELECT idUsuario,nome,cpf,login,dataNascimento FROM usuario WHERE cpf=? AND login=? AND dataNascimento =?";
+        PreparedStatement puxar = conexao.prepareStatement(sql);
+        puxar.setString(1, cpf);
+        puxar.setString(2, login);
+        puxar.setDate(3, dataNascimento);
+        
+        ResultSet lista = puxar.executeQuery();
+        if(lista.next()){
+            usuario.setIdUsuario(lista.getInt("idUsuario"));
+            usuario.setCpf(lista.getString("cpf"));
+            usuario.setNome(lista.getString("nome"));
+            usuario.setLogin(lista.getString("login"));
+            usuario.setDataNascimento(lista.getDate("dataNascimento"));
+        }
+        
+        
+        conexao.close();
+        return usuario;
+    }
+    
+    public boolean modificarSenha(int idUsuario, String senha) throws SQLException{
+        String sql="UPDATE usuario SET senha = ? WHERE idUsuario = ?"; 
+        Connection conexao = ConexaoFactory.conectar();
+        PreparedStatement modificar = conexao.prepareStatement(sql);
+        modificar.setString(1, senha);
+        modificar.setInt(2,idUsuario);
+        modificar.execute();
+        
+        conexao.close();
+        
+       return true;
     }
 }

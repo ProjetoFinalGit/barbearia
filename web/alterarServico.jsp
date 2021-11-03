@@ -139,7 +139,7 @@
                 <div class="inner-wrap">
                     
                    
-                    <label>R$<input class="money" name="preco" type="text" value="${servico.duracao}" required onkeypress="return(moeda(this,'.',',',event))"></label>
+                    <label>R$<input class="money" name="preco" type="text" value="${servico.preco}" required onkeypress="return(moeda(this,'.',',',event))"></label>
                      
                 </div>
                 <div class="button-section">
