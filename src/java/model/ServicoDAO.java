@@ -36,7 +36,7 @@ public class ServicoDAO {
             ps.setString(1, servico.getNome());
             ps.setString(2, servico.getDescricao());
             ps.setDouble(3, servico.getPreco());
-            ps.setDouble(4, servico.getPreco());
+            ps.setDouble(4, servico.getDuracao());
             ps.setInt(5, servico.getIdServico());
             ps.execute();
             conexao.close();

@@ -65,7 +65,7 @@
                     <div clas="col-12">
                        <div class="col-sm-2 col-12" style="padding-bottom: 10px">
                         <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="cadastrarMenu.jsp" 
-                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO MENU</a>
+                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO MENU</a><br><br>
                         </div>
                       
                         <div class="table-responsive" style="text-align: center;">

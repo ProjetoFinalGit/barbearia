@@ -20,13 +20,15 @@
 <!DOCTYPE html>
 <%   
     
+      
     Usuario usuario = new Usuario();
     usuario = GerenciarLogin.verificarAcesso(request, response);
     PrintWriter saida = response.getWriter();
      if(usuario==null){
                      out.println("<script type='text/javascript'> "+
                      "location.href='login.jsp';</script>"); 
-    } 
+    }    
+ 
     %>
 <html>
     <head>
@@ -93,7 +95,7 @@
                     <c:if test="${usuario.perfil.idPerfil==4}">
                           <input type="hidden" name="idUsuario" value="${usuario.idUsuario}"/>
                     </c:if>
-                    <c:if test="${usuario.perfil.idPerfil<=2}">
+                    <c:if test="${usuario.perfil.idPerfil<=3}">
                           <label>Escolha um Cliente:  
 
                             <jsp:useBean class="model.UsuarioDAO" id="users"/>          

@@ -47,7 +47,7 @@
                      out.println("<script type='text/javascript'> "+
                      "location.href='login.jsp';</script>"); 
     }else{
-        if(usuario.getPerfil().getIdPerfil()>3){
+        if(usuario.getPerfil().getIdPerfil()<4){
 
 
 
@@ -85,8 +85,7 @@
                                         <th>Duração(minutos)</th>
                                         <th>Status</th>
                                         <th>Atendente</th>
-                                        <th>Cliente</th>
-                                        <th>CPF Cliente</th>
+                                        
                                         <th>Data de Serviço</th>
                                         <th>Valor</th>
                                         <th>Ação</th>
@@ -104,9 +103,7 @@
                                         <tr>
                                             <td>${agendamentos.agendamento.idAgendamento}</td>
                                             <td>${agendamentos.servico.nome}</td>
-                                            <td><fmt:formatDate 
-                                                    pattern="HH:mm" 
-                                                    value="${agendamentos.horario}"/></td>
+                                            <td>${agendamentos.horario}</td>
                                             <td>${agendamentos.servico.duracao}</td>
                                             <td><c:if test="${agendamentos.status==3}">A confirmar</c:if>
                                                     <c:if test="${agendamentos.status==2}">Cancelado</c:if>
@@ -116,11 +113,7 @@
                                             <c:forEach var="atendente" items="${udao.verificarAtendente(agendamentos.idAtendente)}">
                                                 <td>${atendente.nome}</td>
                                             </c:forEach>
-                                            <c:forEach var="cliente" items="${agenda.carregarCliente(agendamentos.agendamento.idAgendamento)}">
-                                                <td>${cliente.usuario.nome}</td>
-                                              
-                                                <td>${cliente.usuario.cpf}</td>
-                                            </c:forEach>    
+                                               
                                               
                                              
                                               
