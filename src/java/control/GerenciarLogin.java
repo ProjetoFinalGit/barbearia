@@ -67,7 +67,7 @@ public class GerenciarLogin extends HttpServlet {
                     
                 }else{
                     HttpSession session= request.getSession();
-                    session.setAttribute("usuarioLogado", usuario);
+                    session.setAttribute("usuario", usuario);
                     response.sendRedirect("index.jsp");
                 }
                 
@@ -91,9 +91,10 @@ public class GerenciarLogin extends HttpServlet {
         GerenciarLogin.response= response;
         PrintWriter out = response.getWriter();
         Usuario usuario= null;
+        
         try {
             HttpSession sessao = request.getSession();
-            if(sessao.getAttribute("usuarioLogado") == null){
+            if(sessao.getAttribute("usuario") == null){
                 response.sendRedirect("login.jsp");
             }else{
                 String uri = request.getRequestURI();
@@ -108,7 +109,7 @@ public class GerenciarLogin extends HttpServlet {
                 if(queryString != null){ // se nao tiver a querystring adicionada
                     uri += "?"+queryString;
                 }
-                usuario = (Usuario) request.getSession().getAttribute("usuarioLogado"); //atribuiçao para usuario
+                usuario = (Usuario) request.getSession().getAttribute("usuario"); //atribuiçao para usuario
                 if(usuario == null){
                     sessao.setAttribute("mensagem", 
                             "Usuário não autenticado no sistema!");

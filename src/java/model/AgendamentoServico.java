@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -12,16 +13,17 @@ import java.util.Date;
  * @author Vitor
  */
 public class AgendamentoServico {
-    private Date horario;
+    private Time horario;
     private int status;
     private Servico servico;
     private Agendamento agendamento;
+    private int idAtendente;
 
     public Date getHorario() {
         return horario;
     }
 
-    public void setHorario(Date horario) {
+    public void setHorario(Time horario) {
         this.horario = horario;
     }
 
@@ -48,6 +50,16 @@ public class AgendamentoServico {
     public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
     }
+
+    public int getIdAtendente() {
+        return idAtendente;
+    }
+
+    public void setIdAtendente(int idAtendente) {
+        this.idAtendente = idAtendente;
+    }
+    
+    
     
     
     

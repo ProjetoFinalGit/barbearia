@@ -15,6 +15,7 @@ public class UsuarioDAO {
     
     PerfilDAO pdao= new PerfilDAO();
   
+  
     public ArrayList<Usuario> getLista() throws SQLException{
         ArrayList<Usuario> usuarios = new ArrayList();
         Connection conexao = ConexaoFactory.conectar();
@@ -99,17 +100,17 @@ public class UsuarioDAO {
         return true;
     }
     
-    public Usuario getCarregarPorId(int id) throws SQLException{
+    public Usuario getCarregarPorId(int idUsuario) throws SQLException{
         Usuario usuario = new Usuario();
         Perfil perfil= new Perfil();
         Connection conexao= ConexaoFactory.conectar();
         String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.idUsuario=?";
         PreparedStatement ps = conexao.prepareStatement(sql);
-        ps.setInt(1, id);
+        ps.setInt(1, idUsuario);
         ResultSet lista= ps.executeQuery();
         
         while(lista.next()){
-            usuario.setIdUsuario(lista.getInt("idUsuario"));
+            usuario.setIdUsuario(lista.getInt("u.idUsuario"));
             usuario.setNome(lista.getString("u.nome"));
             usuario.setLogin(lista.getString("u.login"));
             usuario.setSenha(lista.getString("u.senha"));
@@ -183,6 +184,46 @@ public class UsuarioDAO {
         
        
         
+        
+    }
+    
+    public ArrayList<Usuario> atendentes() throws SQLException{
+        ArrayList<Usuario> atendentes = new ArrayList();
+        String sql= "SELECT idUsuario, nome FROM usuario WHERE idPerfil BETWEEN 2 AND 3  ";
+        Connection conexao= ConexaoFactory.conectar();
+        PreparedStatement ps= conexao.prepareStatement(sql);
+        ResultSet lista = ps.executeQuery();
+        while(lista.next()){
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(lista.getInt("idUsuario"));
+            usuario.setNome(lista.getString("nome"));
+            atendentes.add(usuario);
+        }
+        
+        
+        
+        
+        return atendentes;
+    }
+    
+    public ArrayList<Usuario> verificarAtendente(int id) throws SQLException{
+        Connection conexao = ConexaoFactory.conectar();
+        String sql = "SELECT idUsuario,nome,cpf FROM usuario WHERE idUsuario = ?";
+        ArrayList<Usuario> lista = new ArrayList<>();
+        PreparedStatement puxar = conexao.prepareStatement(sql);
+        puxar.setInt(1, id);
+        
+        Usuario user = new Usuario();
+        ResultSet usuario= puxar.executeQuery();
+        
+        if(usuario.next()){
+            user.setIdUsuario(usuario.getInt("idUsuario"));
+            user.setNome(usuario.getString("nome"));
+            user.setCpf(usuario.getString("cpf"));
+            lista.add(user);
+        }
+        
+        return lista;
         
     }
 }
