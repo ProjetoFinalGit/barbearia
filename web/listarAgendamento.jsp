@@ -98,7 +98,7 @@
                                 
                                     <jsp:useBean class="model.UsuarioDAO" id="udao" />
                                     
-                                    <c:forEach var="agendamentos" items="${agenda.agendamentosServicos()}">
+                                    <c:forEach var="agendamentos" items="${agenda.agendamentosServicos(usuario.idUsuario, usuario.perfil.idPerfil)}">
                                     <fmt:setLocale value="pt_BR"/>    
                                         
                                         <tr>
@@ -132,17 +132,28 @@
                                             <td><fmt:formatNumber value = "${agendamentos.servico.preco}" type = "currency"/></td>
                                             
                                             <td>
-                                                <a href="gerenciarServico?acao=alterar&idServico="
-                                                       class="btn btn-primary btn-xs" role="button">
-                                                     <i class="fas fa-edit">&nbspAlterar</i>
-                                                    </a>
+                                                <c:if test="${agendamentos.status==3}">
+                                                     <button class='btn btn-success btn-xs'
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','1')">
+                                                        <i class="fas fa-thumbs-up">&nbspConfirmar</i>
+                                                    </button>
+                                                    <button class='btn btn-danger btn-xs'
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        <i class="fas fa-ban">&nbspCancelar</i>
+                                                    </button>
                                                      <script  type="text/javascript">
-                                          function confirmarExclusaoPerfil(idServico){
-                                                    
+                                          function confirmarServico(idAgendamento,status){
+                                                                        var mensagem="";
+                                                                        
+                                                                        if(status==1){
+                                                                            mensagem="confirmar";
+                                                                        }if(status==2){
+                                                                            mensagem="cancelar";
+                                                                        }
                                                               
-                                                                         if(confirm('Deseja realmente excluir o serviço?')){
+                                                                         if(confirm('Deseja realmente '+mensagem+' o serviço?')){
                                                                                            
-                                                                            location.href="gerenciarServico?acao=deletar&idServico="+idServico;
+                                                                            location.href="gerenciarAgendamento?acao="+mensagem+"&idAgendamento="+idAgendamento+"&status="+status;
                                                                          }
                                                                    
 
@@ -150,10 +161,27 @@
     }
 
                                                         </script>  
-                                                    <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarExclusaoPerfil()">
-                                                        <i class="fas fa-trash">&nbspExcluir</i>
-                                                    </button>
+                                                    
+                                                    
+                                                </c:if>
+                                                 <c:if test="${agendamentos.status==2}">
+                                                           <button class='btn btn-danger btn-xs'
+                                                       >
+                                                        <i class="fas fa-ban">&nbspCancelado</i>
+                                                        </button>   
+                                                        
+                                                 </c:if>
+                                                <c:if test="${agendamentos.status==1}">
+                                                           <button class='btn btn-success btn-xs'
+                                                       >
+                                                                        <i class="fas fa-thumbs-up">&nbspConfirmado</i>
+                                                           </button>   
+                                                           <button class='btn btn-danger btn-xs'
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        <i class="fas fa-ban">&nbspCancelar</i>
+                                                        
+                                                 </c:if>            
+                                                
 
                                             </td>  
                                         </tr>

@@ -39,6 +39,35 @@ public class GerenciarAgendamento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String acao = request.getParameter("acao");
+        int idAgendamento = Integer.parseInt(request.getParameter("idAgendamento"));
+        int status= Integer.parseInt(request.getParameter("status"));
+        AgendamentoDAO adao = new AgendamentoDAO();
+        PrintWriter out = response.getWriter();
+        String mensagem = "";
+        
+        
+            try {
+                
+                if(acao.contains("confirmar")){
+                    adao.confirmar(idAgendamento, status);
+                     mensagem="Agendamento Confirmado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='listarAgendamento.jsp';</script>");
+                }
+                if(acao.contains("cancelar")){
+                    adao.cancelar(idAgendamento, status);
+                     mensagem="Agendamento Cancelado!";
+                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='listarAgendamento.jsp';</script>");
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
        
     }
 
@@ -109,6 +138,8 @@ public class GerenciarAgendamento extends HttpServlet {
         }
        
     }
+
+   
 
    
 

@@ -67,7 +67,7 @@ public class AgendamentoDAO {
         return true;
     }
     
-    public ArrayList<AgendamentoServico> agendamentosServicos() throws SQLException{
+    public ArrayList<AgendamentoServico> agendamentosServicos(int idUsuario, int idPerfil) throws SQLException{
         ArrayList<AgendamentoServico> agendamentos = new ArrayList<>();
         Connection conexao = ConexaoFactory.conectar();
         PreparedStatement gravar;
@@ -79,7 +79,7 @@ public class AgendamentoDAO {
      
         ServicoDAO sdao = new ServicoDAO();
         
-       
+        if(idPerfil<=2){
           String sql = "SELECT idServico, idAgendamento, horario, status, idAtendente FROM agendamento_servico";
             gravar = conexao.prepareStatement(sql);
             ResultSet lista = gravar.executeQuery();
@@ -93,26 +93,23 @@ public class AgendamentoDAO {
                 agendamentos.add(agendamentoServico);
             }
             
-            
-        /*if(idPerfil==3){
+        }    
+        if(idPerfil==3){
           
-            sql = "SELECT as.idServico,as.idAgendamento,as.horario,as.status,as.idAtendente,"
-                   + "s.idServico,s.nome,s.descricao,s.preco,s.duracao,"
-                   + "a.idAgendamento,a.dataAgendamento,a.valorTotal,a.status,a.idUsuario "
-                   + "FROM agendamento_servico as INNER JOIN servico s INNER JOIN agendamento a ON as.idServico = s.idServico AND as.idAgendamento = a.idAgendamento WHERE as.idAtendente = ?";
+           String sql = "SELECT idServico, idAgendamento, horario, status, idAtendente FROM agendamento_servico WHERE idAtendente = ?";
             gravar = conexao.prepareStatement(sql);
             gravar.setInt(1, idUsuario);
             ResultSet lista = gravar.executeQuery();
             while(lista.next()){
                 AgendamentoServico agendamentoServico= new AgendamentoServico();
-                agendamentoServico.setServico(sdao.carregarServicoPorId(lista.getInt("as.idServico")));
-                agendamentoServico.setAgendamento(this.carregarPorID(lista.getInt("as.idAgendamento")));
-                agendamentoServico.setHorario(lista.getTime("as.horario"));
-                agendamentoServico.setStatus(lista.getInt("as.status"));
-                agendamentoServico.setIdAtendente(lista.getInt("as.idAtedente"));
+                agendamentoServico.setServico(sdao.carregarServicoPorId(lista.getInt("idServico")));
+                agendamentoServico.setAgendamento(this.carregarPorID(lista.getInt("idAgendamento")));
+                agendamentoServico.setHorario(lista.getTime("horario"));
+                agendamentoServico.setStatus(lista.getInt("status"));
+                agendamentoServico.setIdAtendente(lista.getInt("idAtendente"));
                 agendamentos.add(agendamentoServico);
             }
-        }*/
+        }
         conexao.close();
         return agendamentos;
     }
@@ -192,6 +189,30 @@ public class AgendamentoDAO {
         }
      
         return agendamentos;
+    }
+    
+    public boolean confirmar(int idAgendamento,int status) throws SQLException{
+        Connection conexao = ConexaoFactory.conectar();
+        String sql = "UPDATE agendamento_servico SET status=? WHERE idAgendamento = ?";
+        PreparedStatement confirmar = conexao.prepareStatement(sql);
+        confirmar.setInt(1, status);
+        confirmar.setInt(2, idAgendamento);
+        confirmar.execute();
+        conexao.close();
+        
+        return true;
+    }
+    
+    public boolean cancelar(int idAgendamento,int status) throws SQLException{
+        Connection conexao = ConexaoFactory.conectar();
+        String sql = "UPDATE agendamento_servico SET status=? WHERE idAgendamento = ?";
+        PreparedStatement cancelar = conexao.prepareStatement(sql);
+        cancelar.setInt(1, status);
+        cancelar.setInt(2, idAgendamento);
+        cancelar.execute();
+        conexao.close();
+        
+        return true;
     }
     
     
