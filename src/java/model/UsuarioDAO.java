@@ -226,4 +226,23 @@ public class UsuarioDAO {
         return lista;
         
     }
+    
+    public ArrayList<Usuario> clientes() throws SQLException{
+        ArrayList<Usuario> clientes = new ArrayList();
+        String sql= "SELECT idUsuario, nome FROM usuario WHERE idPerfil =4  ";
+        Connection conexao= ConexaoFactory.conectar();
+        PreparedStatement ps= conexao.prepareStatement(sql);
+        ResultSet lista = ps.executeQuery();
+        while(lista.next()){
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(lista.getInt("idUsuario"));
+            usuario.setNome(lista.getString("nome"));
+            clientes.add(usuario);
+        }
+        
+        
+        
+        
+        return clientes;
+    }
 }

@@ -90,7 +90,24 @@
                     </label>
                     <input type="hidden" name="idAgendamento" value=""/>
                     <input type="hidden" name="status" value="3"/>
-                    <input type="hidden" name="idUsuario" value="${usuario.idUsuario}"/>
+                    <c:if test="${usuario.perfil.idPerfil==4}">
+                          <input type="hidden" name="idUsuario" value="${usuario.idUsuario}"/>
+                    </c:if>
+                    <c:if test="${usuario.perfil.idPerfil<=2}">
+                          <label>Escolha um Cliente:  
+
+                            <jsp:useBean class="model.UsuarioDAO" id="users"/>          
+                                      <select name="idUsuario" required >
+                                          <option value="" selected> Escolha um Cliente</option>
+                                          <c:forEach var="user" items="${users.clientes()}">
+                                             <option value="${user.idUsuario}">${user.nome}</option>
+
+                                         </c:forEach>
+
+
+                                      </select>
+                        </label>
+                    </c:if>
                     
              
 
@@ -111,13 +128,13 @@
                     </label>
                     
                 </div>
-                <div class="section"><span>4</span>Dia de Atendimento:</div>
+                <div class="section"><span>3</span>Dia de Atendimento:</div>
                         <div class="inner-wrap">
                             <label>Data do Dia: <input type="date" name="dataAgendamento" maxlength="125" required/></label>
 
                         </div>
 
-                        <div class="section"><span>3</span>Horário do Agendamento:</div>
+                        <div class="section"><span>4</span>Horário do Agendamento:</div>
                         <div class="inner-wrap">
                             <label>Hora : </label>
                                     <select name="horario" required >
