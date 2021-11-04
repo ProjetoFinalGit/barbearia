@@ -16,33 +16,89 @@ public class UsuarioDAO {
     PerfilDAO pdao= new PerfilDAO();
   
   
-    public ArrayList<Usuario> getLista() throws SQLException{
+    public ArrayList<Usuario> getLista(int idPerfil) throws SQLException{
         ArrayList<Usuario> usuarios = new ArrayList();
         Connection conexao = ConexaoFactory.conectar();
+        String sql = "";
+        PreparedStatement query;
+        ResultSet lista;
         
-        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil";
-        
-        PreparedStatement query= conexao.prepareStatement(sql);
-        ResultSet lista= query.executeQuery();
-        
-        
-        while(lista.next()){
-            
-            PerfilDAO pdao= new PerfilDAO();
-            Usuario usuario = new Usuario();
-            usuario.setIdUsuario(lista.getInt("u.idUsuario"));
-            usuario.setNome(lista.getString("u.nome"));
-            usuario.setLogin(lista.getString("u.login"));
-            usuario.setSenha(lista.getString("u.senha"));
-            usuario.setStatus(lista.getInt("u.status"));
-            usuario.setCpf(lista.getString("u.cpf"));
-            usuario.setEndereco(lista.getString("u.endereco"));
-            usuario.setTelefone(lista.getString("u.telefone"));
-            usuario.setDataNascimento(lista.getDate("u.dataNascimento"));
-            usuario.setPerfil(pdao.getCarregarPorId(lista.getInt("u.idPerfil")));
-            usuarios.add(usuario);
-        }
-        
+        switch(idPerfil){
+            case 1:
+                sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil";
+
+                query= conexao.prepareStatement(sql);
+                lista= query.executeQuery();
+
+
+                while(lista.next()){
+
+                    PerfilDAO pdao= new PerfilDAO();
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(lista.getInt("u.idUsuario"));
+                    usuario.setNome(lista.getString("u.nome"));
+                    usuario.setLogin(lista.getString("u.login"));
+                    usuario.setSenha(lista.getString("u.senha"));
+                    usuario.setStatus(lista.getInt("u.status"));
+                    usuario.setCpf(lista.getString("u.cpf"));
+                    usuario.setEndereco(lista.getString("u.endereco"));
+                    usuario.setTelefone(lista.getString("u.telefone"));
+                    usuario.setDataNascimento(lista.getDate("u.dataNascimento"));
+                    usuario.setPerfil(pdao.getCarregarPorId(lista.getInt("u.idPerfil")));
+                    usuarios.add(usuario);
+                } 
+                break;
+                
+            case 2:
+                sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE p.idPerfil BETWEEN 2 AND 4 ";
+
+                query= conexao.prepareStatement(sql);
+                lista= query.executeQuery();
+
+
+                while(lista.next()){
+
+                    PerfilDAO pdao= new PerfilDAO();
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(lista.getInt("u.idUsuario"));
+                    usuario.setNome(lista.getString("u.nome"));
+                    usuario.setLogin(lista.getString("u.login"));
+                    usuario.setSenha(lista.getString("u.senha"));
+                    usuario.setStatus(lista.getInt("u.status"));
+                    usuario.setCpf(lista.getString("u.cpf"));
+                    usuario.setEndereco(lista.getString("u.endereco"));
+                    usuario.setTelefone(lista.getString("u.telefone"));
+                    usuario.setDataNascimento(lista.getDate("u.dataNascimento"));
+                    usuario.setPerfil(pdao.getCarregarPorId(lista.getInt("u.idPerfil")));
+                    usuarios.add(usuario);
+                } 
+                break;
+            case 3:
+                sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE p.idPerfil BETWEEN 3 AND 4 ";
+
+                query= conexao.prepareStatement(sql);
+                lista= query.executeQuery();
+
+
+                while(lista.next()){
+
+                    PerfilDAO pdao= new PerfilDAO();
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(lista.getInt("u.idUsuario"));
+                    usuario.setNome(lista.getString("u.nome"));
+                    usuario.setLogin(lista.getString("u.login"));
+                    usuario.setSenha(lista.getString("u.senha"));
+                    usuario.setStatus(lista.getInt("u.status"));
+                    usuario.setCpf(lista.getString("u.cpf"));
+                    usuario.setEndereco(lista.getString("u.endereco"));
+                    usuario.setTelefone(lista.getString("u.telefone"));
+                    usuario.setDataNascimento(lista.getDate("u.dataNascimento"));
+                    usuario.setPerfil(pdao.getCarregarPorId(lista.getInt("u.idPerfil")));
+                    usuarios.add(usuario);
+                } 
+                break;
+                
+        } 
         ConexaoFactory.close(conexao);
         return usuarios;
     }

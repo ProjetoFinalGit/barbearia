@@ -26,6 +26,7 @@
                      out.println("<script type='text/javascript'> "+
                      "location.href='login.jsp';</script>"); 
     }
+     
     %>
 
 <html>
@@ -59,8 +60,10 @@
         <link rel="stylesheet" href="css/style.css">
 
     </head>
-    <body>
-
+   
+    <c:if test="${user.perfil.idPerfil==1 && usuario.perfil.idPerfil != 1}">  <p>Usuário não autorizado!</p>
+        </c:if>
+    <c:if test="${user.perfil.idPerfil!=1 || user.perfil.idPerfil==1 && usuario.perfil.idPerfil == 1}">
     <body class="img js-fullheight" style="background-image: url(http://localhost:8080/ProjetoFinal/images/imagembanner.jpeg);">
         <div id="imagemBanner" style="margin:40px;margin-top:40px;"><a href="index.jsp"><img  src="images/logo.png" width="200" ></a></div>
 
@@ -135,7 +138,7 @@
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 
-
+     </c:if>
     </body>
 </html>
 

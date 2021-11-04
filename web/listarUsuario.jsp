@@ -88,7 +88,7 @@
                                 <tbody>
                                     <jsp:useBean class="model.UsuarioDAO" id="udao" />
                                     
-                                    <c:forEach var="usuario" items="${udao.lista}">
+                                    <c:forEach var="usuario" items="${udao.getLista(usuario.perfil.idPerfil)}">
                                     <fmt:setLocale value="pt_BR"/>    
                                         
                                         <tr>
