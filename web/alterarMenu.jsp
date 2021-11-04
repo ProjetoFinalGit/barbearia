@@ -106,6 +106,7 @@
                 
                 <div class="button-section">
                     <input type="submit" name="Salvar" value="Salvar"/>
+                    <a href="listarMenu.jsp" ><input style="float:right;background-color: #F3957A;border-color:#F3957A;" type="button" name="Cadastrar" value="Voltar"/></a>
 
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>

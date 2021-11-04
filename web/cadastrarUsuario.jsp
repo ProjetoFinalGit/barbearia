@@ -91,13 +91,17 @@
                 <div class="inner-wrap">
                      <label>Data de Nascimento: <input type="date" name="dataNascimento"  required /></label>
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required/></label>
-                </div>
-                <div class="button-section">
-                    <input type="submit" name="Cadastrar" />
-
-                    <span class="privacy-policy" style="color:black;">
+                     <span class="privacy-policy" style="color:black;">
                         <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
                     </span>
+                </div>
+                <div class="button-section">
+                    
+                    <input type="submit" name="Cadastrar" />
+                                        <a href="index.jsp" ><input style="float:right;background-color: #F3957A;border-color:#F3957A;" type="button" name="Cadastrar" value="Voltar"/></a>
+
+
+                   
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
             </form>

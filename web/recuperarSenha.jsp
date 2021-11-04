@@ -86,6 +86,8 @@
                 </div>
                 <div class="button-section">
                     <input type="submit" name="Recuperar" />
+                                                                                <a href="login.jsp" ><input style="float:right;background-color: #F3957A;border-color:#F3957A;" type="button" name="Cadastrar" value="Voltar"/></a>
+
 
                     
                 </div>
