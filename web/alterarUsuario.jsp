@@ -108,12 +108,17 @@
                                   </select>
                     </div></c:if>
                 </div>
+                <div class="button-section">
+                      <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
+                </div>    
                     
 
-                    <span class="privacy-policy" style="color:black;">
-                        <input style="float:left;" type="submit" name="Salvar" value="Salvar" />
-                        <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
-                    </span>
+                    
+                <div class="button-section">       
+                        <input style="float:left;" type="submit" style="float: left;" name="Salvar" value="Salvar" />
+                        <a <c:if test="${usuario.perfil.idPerfil < 4}">href="listarUsuario.jsp"</c:if> <c:if test="${usuario.perfil.idPerfil == 4}"></c:if> href="index.jsp" ><input style="float:right;background-color: #F3957A;border-color:#F3957A;" type="button" name="Cadastrar" value="Voltar"/></a>
+                        
+                </div>   
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
             </form>
