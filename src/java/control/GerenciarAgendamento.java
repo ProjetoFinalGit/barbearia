@@ -43,6 +43,7 @@ public class GerenciarAgendamento extends HttpServlet {
         String acao = request.getParameter("acao");
         int idAgendamento = Integer.parseInt(request.getParameter("idAgendamento"));
         int status= Integer.parseInt(request.getParameter("status"));
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         AgendamentoDAO adao = new AgendamentoDAO();
         PrintWriter out = response.getWriter();
         String mensagem = "";
@@ -59,8 +60,13 @@ public class GerenciarAgendamento extends HttpServlet {
                 if(acao.contains("cancelar")){
                     adao.cancelar(idAgendamento, status);
                      mensagem="Agendamento Cancelado!";
-                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                     if(idUsuario<4){
+                        out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='listarAgendamento.jsp';</script>");
+                     }else{
+                          out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='meusAgendamentos.jsp';</script>");
+                     }
                 }
                 
                 
@@ -127,8 +133,13 @@ public class GerenciarAgendamento extends HttpServlet {
                
                 adao.vincularAgendamentoServico(servico, agendamento, agendamentoServico);
                  mensagem="Agendamento efetuado com sucesso!"; 
-               out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='index.jsp';</script>");
+                if(idUsuario<4){
+                        out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='listarAgendamento.jsp';</script>");
+                     }else{
+                          out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='meusAgendamentos.jsp';</script>");
+                     }
                
             }
         } catch (SQLException ex) {

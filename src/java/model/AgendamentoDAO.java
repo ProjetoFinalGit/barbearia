@@ -110,6 +110,25 @@ public class AgendamentoDAO {
                 agendamentos.add(agendamentoServico);
             }
         }
+            if(idPerfil==4){
+                 String sql = "SELECT ag.idServico, ag.idAgendamento, ag.horario, ag.status, ag.idAtendente, "
+                         + "a.idAgendamento, a.dataAgendamento, a.valorTotal, a.status, a.idUsuario,"
+                         + "u.idUsuario FROM agendamento_servico ag INNER JOIN agendamento a INNER JOIN usuario u "
+                         + " a.idUsuario = u.idUsuario AND ag.idAgendamento = a.idAgendamento WHERE u.idUsuario = 18";
+                  gravar = conexao.prepareStatement(sql);
+                gravar.setInt(1, idUsuario);
+                ResultSet lista = gravar.executeQuery();
+                while(lista.next()){
+                    AgendamentoServico agendamentoServico= new AgendamentoServico();
+                    agendamentoServico.setServico(sdao.carregarServicoPorId(lista.getInt("ag.idServico")));
+                    agendamentoServico.setAgendamento(this.carregarPorID(lista.getInt("ag.idAgendamento")));
+                    agendamentoServico.setHorario(lista.getTime("ag.horario"));
+                    agendamentoServico.setStatus(lista.getInt("ag.status"));
+                    agendamentoServico.setIdAtendente(lista.getInt("ag.idAtendente"));
+                    agendamentos.add(agendamentoServico);
+                }
+
+            }
         conexao.close();
         return agendamentos;
     }
@@ -213,6 +232,35 @@ public class AgendamentoDAO {
         conexao.close();
         
         return true;
+    }
+    
+    public ArrayList<AgendamentoServico> meusAgendamentos(int idUsuario, int idPerfil) throws SQLException{
+         ArrayList<AgendamentoServico> agendamentos = new ArrayList<>();
+        Connection conexao = ConexaoFactory.conectar();
+        PreparedStatement gravar;
+   
+        UsuarioDAO udao= new UsuarioDAO();
+     
+        ServicoDAO sdao = new ServicoDAO();
+        
+        if(idPerfil==4){
+             String sql = "SELECT ag.idServico, ag.idAgendamento, ag.horario, ag.status, ag.idAtendente,a.idAgendamento, a.dataAgendamento, a.valorTotal, a.status, a.idUsuario,u.idUsuario FROM agendamento_servico ag INNER JOIN agendamento a ON ag.idAgendamento = a.idAgendamento INNER JOIN usuario u ON a.idUsuario = u.idUsuario WHERE u.idUsuario = ?";
+              gravar = conexao.prepareStatement(sql);
+            gravar.setInt(1, idUsuario);
+            ResultSet lista = gravar.executeQuery();
+            while(lista.next()){
+                AgendamentoServico agendamentoServico= new AgendamentoServico();
+                agendamentoServico.setServico(sdao.carregarServicoPorId(lista.getInt("ag.idServico")));
+                agendamentoServico.setAgendamento(this.carregarPorID(lista.getInt("ag.idAgendamento")));
+                agendamentoServico.setHorario(lista.getTime("ag.horario"));
+                agendamentoServico.setStatus(lista.getInt("ag.status"));
+                agendamentoServico.setIdAtendente(lista.getInt("ag.idAtendente"));
+                agendamentos.add(agendamentoServico);
+            }
+             
+        }
+         conexao.close();
+        return agendamentos;
     }
     
    

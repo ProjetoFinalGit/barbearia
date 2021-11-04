@@ -54,16 +54,16 @@
                    saida.println("<script type='text/javascript'> "+"alert('Usuário não autorizado!');"+
                    "location.href='index.jsp';</script>");
         }
-     }   
-   
-   
-    %>
+     }  
+%>
         
         <div id="container">
             
             <div id="menu">
 
                 <jsp:include page="templates/menu.jsp"/>
+                <p>${usuario.idUsuario}</p><br>
+                                <p>${usuario.perfil.idPerfil}</p>
 
             </div><!-- fim da div menu -->
             <div id="content" style="padding-top: 10px">
@@ -77,6 +77,7 @@
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover table-striped 
                                    table-bordered" id="listarServico">
+                                
                                 <thead  style="background-color:#9D6E58;">
                                     <tr class="text-white">
                                         <th>Agendamento</th>
@@ -98,7 +99,7 @@
                                 
                                     <jsp:useBean class="model.UsuarioDAO" id="udao" />
                                     
-                                    <c:forEach var="agendamentos" items="${agenda.agendamentosServicos(usuario.idUsuario, usuario.perfil.idPerfil)}">
+                                    <c:forEach var="agendamentos" items="${agenda.agendamentosServicos(usuario.idUsuario,usuario.perfil.idPerfil)}">
                                     <fmt:setLocale value="pt_BR"/>    
                                         
                                         <tr>
@@ -136,15 +137,15 @@
                                             <td>
                                                 <c:if test="${agendamentos.status==3}">
                                                      <button class='btn btn-success btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','1')">
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','1','${usuario.idUsuario}')">
                                                         <i class="fas fa-thumbs-up">&nbspConfirmar</i>
                                                     </button>
                                                     <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
                                                         <i class="fas fa-ban">&nbspCancelar</i>
                                                     </button>
                                                      <script  type="text/javascript">
-                                          function confirmarServico(idAgendamento,status){
+                                          function confirmarServico(idAgendamento,status,idUsuario){
                                                                         var mensagem="";
                                                                         
                                                                         if(status==1){
@@ -155,7 +156,7 @@
                                                               
                                                                          if(confirm('Deseja realmente '+mensagem+' o serviço?')){
                                                                                            
-                                                                            location.href="gerenciarAgendamento?acao="+mensagem+"&idAgendamento="+idAgendamento+"&status="+status;
+                                                                            location.href="gerenciarAgendamento?acao="+mensagem+"&idAgendamento="+idAgendamento+"&status="+status+"&idUsuario="+idUsuario;
                                                                          }
                                                                    
 
@@ -179,7 +180,7 @@
                                                                         <i class="fas fa-thumbs-up">&nbspConfirmado</i>
                                                            </button>   
                                                            <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
                                                         <i class="fas fa-ban">&nbspCancelar</i>
                                                         
                                                  </c:if>            

@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Lista de Agendamentos</title>
+        <title>Meus Agendamentos</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, 
@@ -47,7 +47,7 @@
                      out.println("<script type='text/javascript'> "+
                      "location.href='login.jsp';</script>"); 
     }else{
-        if(usuario.getPerfil().getIdPerfil()<4){
+        if(usuario.getPerfil().getIdPerfil()<=3){
 
 
 
@@ -94,16 +94,19 @@
                                 </thead>
                                 <tbody>
                                     <jsp:useBean class="model.AgendamentoDAO" id="agenda" />
-                                
                                     <jsp:useBean class="model.UsuarioDAO" id="udao" />
+                                
+                                
                                     
-                                    <c:forEach var="agendamentos" items="${agenda.agendamentosServicos(usuario.idUsuario, usuario.perfil.idPerfil)}">
+                                    <c:forEach var="agendamentos" items="${agenda.meusAgendamentos(usuario.idUsuario,usuario.perfil.idPerfil)}">
                                     <fmt:setLocale value="pt_BR"/>    
                                         
                                         <tr>
                                             <td>${agendamentos.agendamento.idAgendamento}</td>
                                             <td>${agendamentos.servico.nome}</td>
-                                            <td>${agendamentos.horario}</td>
+                                             <td><fmt:formatDate 
+                                                    pattern="HH:mm" 
+                                                    value="${agendamentos.horario}"/></td>
                                             <td>${agendamentos.servico.duracao}</td>
                                             <td><c:if test="${agendamentos.status==3}">A confirmar</c:if>
                                                     <c:if test="${agendamentos.status==2}">Cancelado</c:if>
@@ -113,31 +116,25 @@
                                             <c:forEach var="atendente" items="${udao.verificarAtendente(agendamentos.idAtendente)}">
                                                 <td>${atendente.nome}</td>
                                             </c:forEach>
-                                               
-                                              
-                                             
-                                              
+                                            
                                            
                                             
                                           
                                              
                                             <td><fmt:formatDate 
                                                     pattern="dd/MM/yyyy" 
-                                                    value="${agendamentos.agendamento.dataAgendamento}"/> </td>        
+                                                    value="${agendamentos.agendamento.dataAgendamento}"/></td>        
                                             <td><fmt:formatNumber value = "${agendamentos.servico.preco}" type = "currency"/></td>
                                             
                                             <td>
-                                                <c:if test="${agendamentos.status==3}">
-                                                     <button class='btn btn-success btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','1')">
-                                                        <i class="fas fa-thumbs-up">&nbspConfirmar</i>
-                                                    </button>
+                                                    <c:if test="${agendamentos.status==3}">
+                                                     
                                                     <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
                                                         <i class="fas fa-ban">&nbspCancelar</i>
                                                     </button>
                                                      <script  type="text/javascript">
-                                          function confirmarServico(idAgendamento,status){
+                                          function confirmarServico(idAgendamento,status,idUsuario){
                                                                         var mensagem="";
                                                                         
                                                                         if(status==1){
@@ -148,7 +145,7 @@
                                                               
                                                                          if(confirm('Deseja realmente '+mensagem+' o serviço?')){
                                                                                            
-                                                                            location.href="gerenciarAgendamento?acao="+mensagem+"&idAgendamento="+idAgendamento+"&status="+status;
+                                                                            location.href="gerenciarAgendamento?acao="+mensagem+"&idAgendamento="+idAgendamento+"&status="+status+"&idUsuario="+idUsuario;
                                                                          }
                                                                    
 
@@ -172,11 +169,10 @@
                                                                         <i class="fas fa-thumbs-up">&nbspConfirmado</i>
                                                            </button>   
                                                            <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2')">
+                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
                                                         <i class="fas fa-ban">&nbspCancelar</i>
                                                         
                                                  </c:if>            
-                                                
 
                                             </td>  
                                         </tr>
