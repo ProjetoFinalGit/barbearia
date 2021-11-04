@@ -171,7 +171,7 @@
                                                                          mensagem="desativar";
                                                                          controle="desativar";
                                                                      }if(status==0){
-                                                                         mensagem="desativar";
+                                                                         mensagem="ativar";
                                                                          controle="ativar";
                                                                      }
                                                                      if(confirm('Deseja realmente ' +mensagem+ ' o usuário  ?')){

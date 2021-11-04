@@ -76,17 +76,30 @@ public class GerenciarUsuario extends HttpServlet {
 
 
                       }if(acao.contentEquals("desativar")){
-                        user.setStatus(0);
-                        udao.gravar(user);
-                        mensagem="Usuário desativado com sucesso!";
-                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                         "location.href='listarUsuario.jsp';</script>");
+                          if( usuario.getPerfil().getIdPerfil()>user.getPerfil().getIdPerfil() || usuario.getPerfil().getIdPerfil()==4){
+                               mensagem="Perfil não autorizado!";
+                                out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                                  "location.href='index.jsp';</script>");
+                          }else{
+                            user.setStatus(0);
+                            udao.gravar(user);
+                            mensagem="Usuário desativado com sucesso!";
+                           out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                             "location.href='listarUsuario.jsp';</script>");}
                       }if(acao.contentEquals("ativar")){
-                        user.setStatus(1);
-                        udao.gravar(user);
-                        mensagem="Usuário ativado com sucesso!";
-                       out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                         "location.href='listarUsuario.jsp';</script>");
+                          
+                        if(usuario.getPerfil().getIdPerfil()>user.getPerfil().getIdPerfil() || usuario.getPerfil().getIdPerfil()==4){
+                               mensagem="Perfil não autorizado!";
+                                out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                                  "location.href='index.jsp';</script>");
+                          }else{
+                              
+                            user.setStatus(1);
+                            udao.gravar(user);
+                            mensagem="Usuário ativado com sucesso!";
+                           out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                             "location.href='listarUsuario.jsp';</script>");
+                        }
                       }
 
 
