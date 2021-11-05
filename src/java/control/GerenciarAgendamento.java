@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -101,7 +102,13 @@ public class GerenciarAgendamento extends HttpServlet {
        UsuarioDAO udao= new UsuarioDAO();
        AgendamentoDAO adao= new AgendamentoDAO();
        
+       Calendar verificarData = Calendar.getInstance();
+       verificarData.getTime();
+       verificarData.add(Calendar.DATE, 15);
        
+       Calendar verificarDomingo = Calendar.getInstance();
+       verificarDomingo.setTime(dataAgendamento);
+       int dia = verificarDomingo.get(Calendar.DAY_OF_WEEK);
        
        
        
@@ -113,9 +120,9 @@ public class GerenciarAgendamento extends HttpServlet {
             SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
             java.util.Date data2 =  formatador.parse(tempo);
             Time time = new Time(data2.getTime());
-            
-          
-            
+           
+            Calendar hora = Calendar.getInstance();
+             hora.setTime(time);
             
             if(idAgendamento.contentEquals("")){
                
@@ -128,19 +135,34 @@ public class GerenciarAgendamento extends HttpServlet {
                 agendamentoServico.setAgendamento(agendamento);
                 agendamentoServico.setHorario(time);
                 
-                adao.gravarAgendamento(agendamento);
-                agendamento = adao.carregarIDAgendamento(status, dataAgendamento, idUsuario);
-               
-                adao.vincularAgendamentoServico(servico, agendamento, agendamentoServico);
-                 mensagem="Agendamento efetuado com sucesso!"; 
-                if(idUsuario<4){
-                        out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                       "location.href='listarAgendamento.jsp';</script>");
-                     }else{
-                          out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                       "location.href='meusAgendamentos.jsp';</script>");
-                     }
-               
+                if(dataAgendamento.compareTo(verificarData.getTime())>=0){
+                    mensagem="O data de atendimento não pode ser superior a 15 dias!";
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='agendamento.jsp';</script>");
+                }else if(dia == 1 && (hora.get(Calendar.HOUR)>2)){
+                    mensagem="Não atendemos neste horário no Domingo!";
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='agendamento.jsp';</script>");
+                }else if(adao.qtdeAgendamentos(idUsuario)>=4){
+                    mensagem="Você já tem 4 atendimentos confirmados ou para serem confirmados, cancele um deles para prosseguir!";
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='agendamento.jsp';</script>");
+                }
+                else{
+
+                    adao.gravarAgendamento(agendamento);
+                    agendamento = adao.carregarIDAgendamento(status, dataAgendamento, idUsuario);
+
+                    adao.vincularAgendamentoServico(servico, agendamento, agendamentoServico);
+                     mensagem="Agendamento efetuado com sucesso!"; 
+                    if(idUsuario<4){
+                            out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                           "location.href='listarAgendamento.jsp';</script>");
+                         }else{
+                              out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                           "location.href='meusAgendamentos.jsp';</script>");
+                         }
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarAgendamento.class.getName()).log(Level.SEVERE, null, ex);

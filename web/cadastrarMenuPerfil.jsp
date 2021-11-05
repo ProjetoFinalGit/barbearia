@@ -115,9 +115,9 @@
 
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
-            </form>
+            </form><br><br>
             </div>                      
-                                  <div class="row"><br><br>
+                                  <div class="row">
                                        <h2>Menus Vinculados</h2>
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered" id="listarMenus">

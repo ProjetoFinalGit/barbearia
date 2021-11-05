@@ -129,12 +129,12 @@
                                             <td>
                                                     <c:if test="${agendamentos.status==3}">
                                                      
-                                                    <button class='btn btn-danger btn-xs'
+                                                    <button class='btn btn-warning btn-xs'
                                                         onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
-                                                        <i class="fas fa-ban">&nbspCancelar</i>
+                                                        <i  class="fas fa-hourglass-half">&nbspEm Espera</i>
                                                     </button>
                                                      <script  type="text/javascript">
-                                          function confirmarServico(idAgendamento,status,idUsuario){
+                                           function confirmarServico(idAgendamento,status,idUsuario){
                                                                         var mensagem="";
                                                                         
                                                                         if(status==1){
@@ -168,9 +168,7 @@
                                                        >
                                                                         <i class="fas fa-thumbs-up">&nbspConfirmado</i>
                                                            </button>   
-                                                           <button class='btn btn-danger btn-xs'
-                                                        onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
-                                                        <i class="fas fa-ban">&nbspCancelar</i>
+                                                           
                                                         
                                                  </c:if>            
 

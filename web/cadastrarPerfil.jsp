@@ -103,12 +103,12 @@
             </form>
         </div>     
 
-
+        <jsp:include page="templates/footer.jsp"/>
         <script src="js/jquery.min.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
-        <jsp:include page="templates/footer.jsp"/>
+        
         
 
 

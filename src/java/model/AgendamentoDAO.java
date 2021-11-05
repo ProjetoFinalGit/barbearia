@@ -264,6 +264,23 @@ public class AgendamentoDAO {
     }
     
    
-    
+    public int qtdeAgendamentos(int idUsuario) throws SQLException{
+        int i=0;
+         Connection conexao = ConexaoFactory.conectar();
+         String sql = "SELECT ag.idServico, ag.idAgendamento, ag.horario, ag.status, ag.idAtendente,a.idAgendamento, a.dataAgendamento, a.valorTotal, a.status, a.idUsuario,u.idUsuario FROM agendamento_servico ag INNER JOIN agendamento a ON ag.idAgendamento = a.idAgendamento INNER JOIN usuario u ON a.idUsuario = u.idUsuario WHERE u.idUsuario = ?";
+         PreparedStatement  gravar = conexao.prepareStatement(sql);
+         gravar.setInt(1, idUsuario);
+         ResultSet lista = gravar.executeQuery();
+            while(lista.next()){
+                AgendamentoServico agendamentoServico= new AgendamentoServico();
+               
+                agendamentoServico.setStatus(lista.getInt("ag.status"));
+                if(agendamentoServico.getStatus()==1 || agendamentoServico.getStatus()==3){
+                    i++;
+                }
+            }
+         
+        return i;
+    }
     
 }

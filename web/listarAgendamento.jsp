@@ -62,9 +62,7 @@
             <div id="menu">
 
                 <jsp:include page="templates/menu.jsp"/>
-                <p>${usuario.idUsuario}</p><br>
-                                <p>${usuario.perfil.idPerfil}</p>
-
+           
             </div><!-- fim da div menu -->
             <div id="content" style="padding-top: 10px">
                 <div class="h-100 justify-content-center align-items-center">
@@ -181,7 +179,7 @@
                                                            </button>   
                                                            <button class='btn btn-danger btn-xs'
                                                         onclick="confirmarServico('${agendamentos.agendamento.idAgendamento}','2','${usuario.idUsuario}')">
-                                                        <i class="fas fa-ban">&nbspCancelar</i>
+                                                               <i class="fas fa-ban">&nbspCancelar</i></button>
                                                         
                                                  </c:if>            
                                                 
