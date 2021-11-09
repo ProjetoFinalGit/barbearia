@@ -44,7 +44,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, 
               maximum-scale=1, user-scalable=no" />
        
-      
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
    

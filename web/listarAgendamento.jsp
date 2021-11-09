@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
         <link rel="stylesheet" href="datatables/dataTables.bootstrap4.css"/>
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
-        
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
         <script src="https://kit.fontawesome.com/3f3417947e.js" crossorigin="anonymous"></script>
 
       

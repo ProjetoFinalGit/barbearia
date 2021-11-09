@@ -47,7 +47,7 @@
       
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
-   
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" href="css/formulario.css" >
         <script src="https://kit.fontawesome.com/3f3417947e.js" crossorigin="anonymous"></script>
         
