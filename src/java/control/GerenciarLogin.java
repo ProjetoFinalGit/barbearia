@@ -57,7 +57,7 @@ public class GerenciarLogin extends HttpServlet {
         
         try {
             usuario= udao.getCarregarUsuario(login,senha);
-            
+           
             if((usuario.getIdUsuario()>0) && (usuario.getSenha().equals(senha.trim()))){
                
                 if(usuario.getStatus()!=1){
