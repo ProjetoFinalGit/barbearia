@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'leolima'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6EC9AA9004F94ABD91FCAD6A3D6C3951 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D01B2DE0D38B4DDE9C5858D8ECFC9736 }}
           package: '*.war'
