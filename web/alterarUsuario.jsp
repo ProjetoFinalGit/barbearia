@@ -103,7 +103,7 @@
                                   <select name="idPerfil" required >
                                       <option value="" selected> Escolha o perfil de acesso:</option>
                                       <c:forEach var="perfil" items="${pdao.lista}">
-                                          <option value="${perfil.idPerfil}" >${perfil.nome}</option>
+                                          <option value="${perfil.idPerfil}" <c:if test="${user.perfil.idPerfil == perfil.idPerfil}">selected</c:if>>${perfil.nome}</option>
                                       
                                      </c:forEach>
                                       
