@@ -50,4 +50,4 @@ jobs:
           app-name: 'leolima'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D927B788F42440A3AD42080E2ABA5B05 }}
-          package: '*.war'
+          package: 'target/*.war'
