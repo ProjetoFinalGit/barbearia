@@ -7,10 +7,10 @@ import java.sql.SQLException;
 
 
 public class ConexaoFactory {
-    private static final String URL = "jdbc:mysql://leolimabarbearia.mysql.database.azure.com:3306/barbearia?serverTimezone=UTC";
-    private static final String USUARIO = "adminprojeto@leolimabarbearia";
-    private static final String SENHA = "Projetofinal123";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://leolima.cc5g8rz3azei.us-east-2.rds.amazonaws.com:3306/barbearia?serverTimezone=UTC";
+    private static final String USUARIO = "admin";
+    private static final String SENHA = "projetofinal123";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     public static Connection conectar() throws SQLException{
         try {
